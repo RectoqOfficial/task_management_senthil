@@ -29,7 +29,7 @@
                 @foreach($roles as $role)
                     <tr>
                         <td>{{ $role->id }}</td>
-                        <td>{{ $role->name }}</td>
+                        <td>{{ $role->role }}</td>
                         <td>{{ $role->department }}</td>
                         <td>
                             <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST">

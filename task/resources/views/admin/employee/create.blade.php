@@ -55,11 +55,14 @@
         </div>
 
         <div>
-            <label class="block text-gray-700">Role:</label>
-            <select name="role_id" id="roleSelect" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
-                <option value="">Select Role</option>
-            </select>
-        </div>
+    <label class="block text-gray-700">Role:</label>
+    <select name="role_id" id="roleSelect" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+        <option value="">Select Role</option>
+        @foreach($roles as $role)
+            <option value="{{ $role->id }}" data-department="{{ $role->department }}">{{ $role->role }}</option>
+        @endforeach
+    </select>
+</div>
 
         <div>
             <label class="block text-gray-700">Joining Date:</label>

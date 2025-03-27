@@ -9,7 +9,12 @@
 <body class="bg-gray-100 p-6">
 
 <div class="max-w-6xl mx-auto bg-white shadow-md rounded-lg p-6">
-    <h2 class="text-2xl font-bold mb-4 text-center text-gray-700">Employee List</h2>
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-gray-700">Employee List</h2>
+        <a href="{{ route('admin.employee.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+            + Create Employee
+        </a>
+    </div>
 
     <table class="w-full border-collapse border border-gray-300">
         <thead>

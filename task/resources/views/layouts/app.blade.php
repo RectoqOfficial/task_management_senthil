@@ -42,7 +42,7 @@
         Admin Panel
     </a>
     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-    <a href=>Employee Details</a>
+    <a href="{{ route('admin.employee.index') }}">Employee Details</a>
     <a href=>Task Details</a>
     <a href=>Score Board</a>
     <a href="{{ route('admin.roles.index') }}">Role Details</a>

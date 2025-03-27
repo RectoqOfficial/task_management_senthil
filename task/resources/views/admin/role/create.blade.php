@@ -24,7 +24,7 @@
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Role Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="role" name="role" required>
             </div>
             <div class="mb-3">
                 <label for="department" class="form-label">Department</label>
