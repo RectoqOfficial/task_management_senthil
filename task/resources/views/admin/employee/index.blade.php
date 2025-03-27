@@ -4,35 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 p-6">
 
-<h2>Employee List</h2>
+<div class="max-w-6xl mx-auto bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-bold mb-4 text-center text-gray-700">Employee List</h2>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Contact</th>
-        <th>Gender</th>
-        <th>Department</th>
-        <th>Role</th>
-        <th>Joining Date</th>
-    </tr>
-    @foreach($employees as $employee)
-    <tr>
-        <td>{{ $employee->id }}</td>
-        <td>{{ $employee->name }}</td>
-        <td>{{ $employee->email }}</td>
-        <td>{{ $employee->contact }}</td>
-        <td>{{ $employee->gender }}</td>
-        <td>{{ $employee->department }}</td>
-        <td>{{ $employee->role->role }}</td>
-        <td>{{ $employee->joining_date }}</td>
-    </tr>
-    @endforeach
-</table>
+    <table class="w-full border-collapse border border-gray-300">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="border border-gray-300 px-4 py-2">ID</th>
+                <th class="border border-gray-300 px-4 py-2">Name</th>
+                <th class="border border-gray-300 px-4 py-2">Email</th>
+                <th class="border border-gray-300 px-4 py-2">Contact</th>
+                <th class="border border-gray-300 px-4 py-2">Gender</th>
+                <th class="border border-gray-300 px-4 py-2">Department</th>
+                <th class="border border-gray-300 px-4 py-2">Role</th>
+                <th class="border border-gray-300 px-4 py-2">Joining Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($employees as $employee)
+            <tr class="bg-white hover:bg-gray-100 text-gray-700">
+                <td class="border border-gray-300 px-4 py-2 text-center">{{ $employee->id }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $employee->name }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $employee->email }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $employee->contact }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $employee->gender }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $employee->department }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $employee->role->role }}</td>
+                <td class="border border-gray-300 px-4 py-2 text-center">{{ $employee->joining_date }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

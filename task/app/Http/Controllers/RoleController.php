@@ -24,13 +24,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:roles,name',
-            'department' => 'required'
+            'role' =>  'required|string|max:255',
+            'department' => 'required|string|max:255',
         ]);
 
         Role::create([
-            'name' => $request->name,
-            'department' => $request->department
+            'role' => $request->role,
+            'department' => $request->department,
         ]);
 
         return redirect()->route('admin.roles.index')->with('success', 'Role added successfully');

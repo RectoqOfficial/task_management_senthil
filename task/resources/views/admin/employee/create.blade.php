@@ -4,52 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Employee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-<h2>Add Employee</h2>
+<div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700 text-center">Add Employee</h2>
 
-<form action="/employees/store" method="POST">
-    @csrf
+    <form action="/employees/store" method="POST" class="space-y-4">
+        @csrf
 
-    <label>Name:</label>
-    <input type="text" name="name" required>
+        <div>
+            <label class="block text-gray-700">Name:</label>
+            <input type="text" name="name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+        </div>
 
-    <label>Email:</label>
-    <input type="email" name="email" required>
+        <div>
+            <label class="block text-gray-700">Email:</label>
+            <input type="email" name="email" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+        </div>
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
+        <div>
+            <label class="block text-gray-700">Password:</label>
+            <input type="password" name="password" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+        </div>
 
-    <label>Contact:</label>
-    <input type="text" name="contact" required>
+        <div>
+            <label class="block text-gray-700">Contact:</label>
+            <input type="text" name="contact" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+        </div>
 
-    <label>Gender:</label>
-    <select name="gender" required>
-        <option value="">Select Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-    </select>
+        <div>
+            <label class="block text-gray-700">Gender:</label>
+            <select name="gender" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
 
-    <label>Department:</label>
-    <select name="department" id="departmentSelect" required>
-        <option value="">Select Department</option>
-        @foreach($departments as $department)
-            <option value="{{ $department }}">{{ $department }}</option>
-        @endforeach
-    </select>
+        <div>
+            <label class="block text-gray-700">Department:</label>
+            <select name="department" id="departmentSelect" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+                <option value="">Select Department</option>
+                @foreach($departments as $department)
+                    <option value="{{ $department }}">{{ $department }}</option>
+                @endforeach
+            </select>
+        </div>
 
-    <label>Role:</label>
-    <select name="role_id" id="roleSelect" required>
-        <option value="">Select Role</option>
-    </select>
+        <div>
+            <label class="block text-gray-700">Role:</label>
+            <select name="role_id" id="roleSelect" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+                <option value="">Select Role</option>
+            </select>
+        </div>
 
-    <label>Joining Date:</label>
-    <input type="date" name="joining_date" required>
+        <div>
+            <label class="block text-gray-700">Joining Date:</label>
+            <input type="date" name="joining_date" class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300" required>
+        </div>
 
-    <button type="submit">Add Employee</button>
-</form>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Add Employee</button>
+    </form>
+</div>
 
 <script>
     $('#departmentSelect').on('change', function() {
