@@ -8,12 +8,15 @@ use App\Models\Role;
 
 class EmployeeController extends Controller
 {
+
+//Employee Index show Page    
     public function index()
     {
         $employees = Employee::with('role')->get();
         return view('admin.employee.index', compact('employees'));
     }
 
+//Employee Create Page      
     public function create()
     {
         $departments = Role::distinct()->pluck('department');
@@ -22,6 +25,7 @@ class EmployeeController extends Controller
         return view('admin.employee.create', compact('departments', 'roles'));
     }
 
+//Employee Store Database
     public function store(Request $request)
     {
         $request->validate([
@@ -48,4 +52,5 @@ class EmployeeController extends Controller
 
         return redirect()->route('admin.employee.index')->with('success', 'Employee added successfully!');
     }
+    
 }

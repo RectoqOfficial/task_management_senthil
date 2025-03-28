@@ -6,13 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 
+
 class EmployeeAuthController extends Controller
 {
+
+//Employee Login show Page    
     public function showLoginForm()
     {
         return view('auth.employee_login');
     }
 
+//Employee Login Page 
     public function login(Request $request)
     {
         $request->validate([
@@ -27,11 +31,13 @@ class EmployeeAuthController extends Controller
         return back()->withErrors(['email' => 'Invalid email or password']);
     }
 
+//Employee Dashboard Page 
     public function dashboard()
     {
-        return view('employee.dashboard');
+        return view('auth.dashboard');
     }
 
+//Employee Logout Page 
     public function logout()
     {
         Auth::guard('employee')->logout();

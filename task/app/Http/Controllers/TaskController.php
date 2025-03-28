@@ -8,18 +8,22 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+
+//Task Index show page    
     public function index()
     {
         $tasks = Task::with('employee')->get();
         return view('admin.tasks.index', compact('tasks'));
     }
 
+//Task Create page      
     public function create()
     {
         $employees = Employee::all();
         return view('admin.tasks.create', compact('employees'));
     }
-
+    
+//Task Store Database  
     public function store(Request $request)
     {
         $request->validate([

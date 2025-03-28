@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+// Admin Show Login Page
 class AdminAuthController extends Controller
 {
     public function showLoginForm()
@@ -12,6 +13,7 @@ class AdminAuthController extends Controller
         return view('auth.admin_login');
     }
 
+ //Admin Login   
     public function login(Request $request)
     {
         $request->validate([
@@ -26,6 +28,7 @@ class AdminAuthController extends Controller
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
+//Admin Logout
     public function logout()
     {
         Auth::guard('admin')->logout();
