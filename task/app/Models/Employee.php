@@ -14,6 +14,9 @@ class Employee extends Model
         'department', 'role_id', 'joining_date'
     ];
 
+    protected $hidden = [
+        'password',
+    ];
     public function role()
     {
         return $this->belongsTo(Role::class);

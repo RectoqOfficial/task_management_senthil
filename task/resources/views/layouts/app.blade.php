@@ -43,7 +43,7 @@
     </a>
     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
     <a href="{{ route('admin.employee.index') }}">Employee Details</a>
-    <a href=>Task Details</a>
+    <a href="{{ route('admin.tasks.index') }}">Task Details</a>
     <a href=>Score Board</a>
     <a href="{{ route('admin.roles.index') }}">Role Details</a>
     <a href="{{ route('admin.logout') }}" class="text-danger logout"

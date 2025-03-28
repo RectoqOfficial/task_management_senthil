@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\EmployeeAuthController;
 
 
 
@@ -41,3 +43,22 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('admin.employee.create');
     Route::post('/employees/store', [EmployeeController::class, 'store'])->name('admin.employee.store');
      
+
+    
+        Route::get('admin/tasks', [TaskController::class, 'index'])->name('admin.tasks.index');
+        Route::get('admin/tasks/create', [TaskController::class, 'create'])->name('admin.tasks.create');
+        Route::post('admin/tasks/store', [TaskController::class, 'store'])->name('admin.tasks.store');
+
+
+
+        // employee
+
+
+
+
+Route::get('/employee/login', [EmployeeAuthController::class, 'showLoginForm'])->name('employee.login');
+Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('employee.login.submit');
+Route::post('/employee/logout', [EmployeeAuthController::class, 'logout'])->name('employee.logout');
+
+    Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('employee.dashboard');
+
