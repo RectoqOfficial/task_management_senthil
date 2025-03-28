@@ -38,6 +38,7 @@
                     <th class="px-4 py-3">Department</th>
                     <th class="px-4 py-3">Role</th>
                     <th class="px-4 py-3">Joining Date</th>
+                    <th class="px-4 py-3">Action</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700">
@@ -51,6 +52,11 @@
                     <td class="px-4 py-3">{{ $employee->department }}</td>
                     <td class="px-4 py-3">{{ $employee->role->role }}</td>
                     <td class="px-4 py-3 text-center">{{ $employee->joining_date }}</td>
+                    <td class="px-4 py-3">
+                        <a href="{{ route('admin.employee.show', $employee->id) }}" class="bg-blue-500 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Show
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -60,3 +66,5 @@
 
 </body>
 </html>
+
+<!-- nice -->

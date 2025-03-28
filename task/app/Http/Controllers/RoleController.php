@@ -13,7 +13,7 @@ class RoleController extends Controller
         $roles = Role::all();
         return view('admin.role.index', compact('roles'));
     }
-
+// nice
     // Show create form
     public function create()
     {

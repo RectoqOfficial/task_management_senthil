@@ -89,7 +89,7 @@
     <a href="{{ route('admin.dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
     <a href="{{ route('admin.employee.index') }}"><i class="bi bi-people"></i> Employee Details</a>
     <a href="{{ route('admin.tasks.index') }}"><i class="bi bi-list-task"></i> Task Details</a>
-    <a href="#"><i class="bi bi-trophy"></i> Score Board</a>
+    <a href="{{ url('/score/create') }}"><i class="bi bi-trophy"></i> Score Board</a>
     <a href="{{ route('admin.roles.index') }}"><i class="bi bi-person-badge"></i> Role Details</a>
     <a href="{{ route('admin.logout') }}" class="text-danger logout" 
        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -107,3 +107,4 @@
 
 </body>
 </html>
+ <!-- this is super -->

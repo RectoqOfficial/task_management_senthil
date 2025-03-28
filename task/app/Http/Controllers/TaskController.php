@@ -15,6 +15,8 @@ class TaskController extends Controller
         $tasks = Task::with('employee')->get();
         return view('admin.tasks.index', compact('tasks'));
     }
+    
+    // nice
 
 //Task Create page      
     public function create()
@@ -22,7 +24,7 @@ class TaskController extends Controller
         $employees = Employee::all();
         return view('admin.tasks.create', compact('employees'));
     }
-    
+
 //Task Store Database  
     public function store(Request $request)
     {

@@ -15,7 +15,7 @@ class EmployeeController extends Controller
         $employees = Employee::with('role')->get();
         return view('admin.employee.index', compact('employees'));
     }
-
+// nice
 //Employee Create Page      
     public function create()
     {
@@ -53,4 +53,10 @@ class EmployeeController extends Controller
         return redirect()->route('admin.employee.index')->with('success', 'Employee added successfully!');
     }
     
+    public function show($id)
+{
+    $employee = Employee::with('role')->findOrFail($id);
+    return view('admin.employee.show', compact('employee'));
+}
+
 }
