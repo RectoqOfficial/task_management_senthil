@@ -50,61 +50,60 @@
 <body>
     <div class="container">
         <h5 class="text-center text-primary fw-bold mb-2">Create Task</h5>
-        <form action="{{ route('admin.tasks.store') }}" method="POST">
-            @csrf
+        <form id="task-form" action="{{ route('admin.tasks.store') }}" method="POST">
+    @csrf
 
-            <div class="mb-1">
-                <label for="task_title">Task Title</label>
-                <input type="text" name="task_title" class="form-control" required>
-            </div>
+    <div class="mb-2">
+        <label for="task_title">Task Title</label>
+        <input type="text" name="task_title" class="form-control" required>
+    </div>
 
-            <div class="mb-1">
-                <label for="description">Description</label>
-                <textarea name="description" class="form-control" rows="2" required></textarea>
-            </div>
+    <div class="mb-2">
+        <label for="description">Description</label>
+        <textarea name="description" class="form-control" rows="2" required></textarea>
+    </div>
 
-            <div class="mb-1">
-                <label for="employee_id">Assign To</label>
-                <select name="employee_id" class="form-control" required>
-                    <option value="">Select Employee</option>
-                    @foreach ($employees as $employee)
-                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+    <div class="mb-2">
+        <label for="employee_id">Assign To</label>
+        <select name="employee_id" class="form-control" required>
+            <option value="">Select Employee</option>
+            @foreach ($employees as $employee)
+                <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+            @endforeach
+        </select>
+    </div>
 
-            <div class="mb-1">
-                <label for="status">Status</label>
-                <select name="status" class="form-control" required>
-                    <option value="Pending">Pending</option>
-                    <option value="Ongoing">Ongoing</option>
-                    <option value="Completed">Completed</option>
-                </select>
-            </div>
+    <div class="mb-2">
+        <label for="status">Status</label>
+        <select name="status" class="form-control" required>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
 
-            <div class="row">
-                <div class="col-6 mb-1">
-                    <label for="deadline">Deadline</label>
-                    <input type="date" name="deadline" class="form-control" required>
-                </div>
-                <div class="col-6 mb-1">
-                    <label for="task_start_date">Start Date</label>
-                    <input type="date" name="task_start_date" class="form-control" required>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-6 mb-2">
+            <label for="deadline">Deadline</label>
+            <input type="date" name="deadline" class="form-control" required>
+        </div>
+        <div class="col-6 mb-2">
+            <label for="task_start_date">Start Date</label>
+            <input type="date" name="task_start_date" class="form-control" required>
+        </div>
+    </div>
 
-            <div class="mb-1">
-                <label for="total_days">Total Days</label>
-                <input type="number" name="total_days" class="form-control" required>
-            </div>
+    <div class="mb-2">
+        <label for="remarks">Remarks</label>
+        <textarea name="remarks" class="form-control" rows="1"></textarea>
+    </div>
 
-            <div class="mb-1">
-                <label for="remarks">Remarks</label>
-                <textarea name="remarks" class="form-control" rows="1"></textarea>
-            </div>
+    <button type="submit" class="btn btn-success w-100">Create Task</button>
+</form>
+  
 
-            <button type="submit" class="btn btn-success w-100">Create Task</button>
-        </form>
     </div>
 </body>
 </html>
+
+<!-- one -->

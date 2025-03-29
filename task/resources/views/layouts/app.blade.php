@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -81,7 +81,7 @@
 </head>
 <body>
 
-<!-- Sidebar -->
+
 <div class="sidebar">
     <div class="profile">
         <h5>Welcome, Admin</h5>
@@ -100,11 +100,10 @@
     </form>
 </div>
 
-<!-- Main Content -->
 <div class="content">
     @yield('content')
 </div>
 
 </body>
-</html>
+</html> -->
  <!-- this is super -->

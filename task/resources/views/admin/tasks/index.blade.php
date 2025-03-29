@@ -21,17 +21,16 @@
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 900px;
         }
-        table {
-            border-radius: 10px;
-            overflow: hidden;
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
         }
         thead {
             background-color: #343a40;
             color: white;
-        }
-        .table tbody tr:hover {
-            background: #f8f9fa;
         }
         .status-badge {
             font-size: 14px;
@@ -44,12 +43,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="mb-0 text-primary fw-bold">Task List</h2>
-            <a href="{{ route('admin.tasks.create') }}" class="btn btn-success">+ Create Task</a>
-        </div>
 
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0 text-primary fw-bold">Task List</h2>
+        <button id="load-create-task" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#taskModal">+ Create Task</button>
+    </div>
+
+    <div class="table-container">
         <table class="table table-bordered table-hover text-center">
             <thead>
                 <tr>
@@ -84,7 +85,64 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<!-- Bootstrap Modal for Create Task Form -->
+<div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="modal-body-content">
+        <!-- Form will be loaded here via AJAX -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#load-create-task").click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "{{ route('admin.tasks.create') }}", 
+                type: "GET",
+                success: function (response) {
+                    $("#modal-body-content").html(response);
+                },
+                error: function () {
+                    alert("Failed to load Create Task form.");
+                }
+            });
+        });
+
+        // Handle Task Form Submission via AJAX
+        $(document).on("submit", "#task-form", function (e) {
+            e.preventDefault();
+
+            let formData = $(this).serialize();
+
+            $.ajax({
+                url: "{{ route('admin.tasks.store') }}",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    alert("Task Created Successfully!");
+                    $("#taskModal").modal("hide");
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error creating task.");
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
-
-<!-- nice -->

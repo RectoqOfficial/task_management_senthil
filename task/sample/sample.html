@@ -37,3 +37,128 @@
         </button>
     </form>
 </nav> -->
+
+
+<!-- <style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, #004d99, #00264d);
+    padding-top: 20px;
+    color: white;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* Ensures sidebar is scrollable if content overflows */
+}
+
+.sidebar a {
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 5px solid #17a2b8;
+    padding-left: 10px;
+    border-radius:
+</style>
+</head>
+<body>
+    <div class="d-flex">
+        Sidebar
+        <div class="sidebar">
+            <h3 class="text-center">Admin Panel</h3>
+            <a href="#" class="load-content" data-url="{{ route('admin.tasks.index') }}">Task Details</a>
+            <a href="#" class="load-content" data-url="{{ route('admin.roles.index') }}">Role Details</a>
+            <a href="#" class="load-content" data-url="{{ route('admin.employee.index') }}">Employee Details</a>
+            <a href="#" class="load-content" data-url="{{ route('admin.score.index') }}">Scoreboard</a>
+        </div>
+
+        Main Content
+        <div class="content">
+            <div id="dashboard-content">
+                <h2 class="text-primary">Welcome to Admin Dashboard</h2>
+                <p>Click on the menu to view details dynamically.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".load-content").click(function(e) {
+                e.preventDefault();
+                let url = $(this).data("url");
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function(response) {
+                        $("#dashboard-content").html(response);
+                    },
+                    error: function(xhr) {
+                        $("#dashboard-content").html("<p class='text-danger'>Failed to load content.</p>");
+                    }
+                });
+            });
+        });
+    </script> -->
+
+
+ <!-- index ajsx -->
+    <!-- <script>
+        $(document).ready(function () {
+    $("#load-create-role").click(function (e) {
+        e.preventDefault();
+        
+        $.ajax({
+            url: "{{ route('admin.roles.create') }}", // Laravel route for create form
+            type: "GET",
+            success: function (response) {
+                $("#create-role-container").html(response); // Load form inside div
+            },
+            error: function () {
+                alert("Failed to load Create Role form.");
+            }
+        });
+    });
+});
+
+
+    </script> -->
+
+    <!-- employee ajash create -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#load-create-employee").click(function (e) {
+                e.preventDefault();
+                
+                $.ajax({
+                    url: "{{ route('admin.employee.create') }}", // Laravel route for create form
+                    type: "GET",
+                    success: function (response) {
+                        $("#create-employee-container").html(response); // Load form inside div
+                    },
+                    error: function () {
+                        alert("Failed to load Create Employee form.");
+                    }
+                });
+            });
+        });
+    </script> -->

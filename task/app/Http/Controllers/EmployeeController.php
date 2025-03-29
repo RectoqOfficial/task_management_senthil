@@ -8,14 +8,11 @@ use App\Models\Role;
 
 class EmployeeController extends Controller
 {
-
-//Employee Index show Page    
     public function index()
     {
         $employees = Employee::with('role')->get();
         return view('admin.employee.index', compact('employees'));
     }
-// nice
 //Employee Create Page      
     public function create()
     {
