@@ -119,7 +119,7 @@
         <a href="#" id="load-dashboard" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a>
         <a href="#" id="load-employees"><i class="bi bi-people"></i> Employee Details</a>
         <a href="#" id="load-tasks"><i class="bi bi-list-task"></i> Task Details</a>
-        <a href="{{ url('/score/create') }}"><i class="bi bi-trophy"></i> Score Board</a>
+        <a href="#" id="load-scoreboard"><i class="bi bi-trophy"></i> Score Board</a>
         <a href="javascript:void(0);" id="load-roles"><i class="bi bi-person-badge"></i> Role Details</a>
 
         <a href="{{ route('admin.logout') }}" class="text-danger" 
@@ -200,6 +200,22 @@
                 });
             });
         });
+
+        // Load Score Board
+$("#load-scoreboard").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "{{ route('score.index') }}",
+        type: "GET",
+        success: function (response) {
+            $("#dynamic-content").html(response);
+        },
+        error: function () {
+            alert("Failed to load Score Board.");
+        }
+    });
+});
+
     </script>
 
 </body>

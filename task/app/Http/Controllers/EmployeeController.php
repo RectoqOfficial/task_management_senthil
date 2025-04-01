@@ -56,4 +56,14 @@ class EmployeeController extends Controller
     return view('admin.employee.show', compact('employee'));
 }
 
+// Employee Delete
+
+public function destroy($id)
+{
+    $employee = Employee::findOrFail($id);
+    $employee->delete();
+
+    return response()->json(['message' => 'Employee deleted successfully!']);
+}
+
 }

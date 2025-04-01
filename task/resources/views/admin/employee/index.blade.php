@@ -53,9 +53,14 @@
                     <td class="px-3 py-2">{{ $employee->role->role }}</td>
                     <td class="px-3 py-2 text-center">{{ $employee->joining_date }}</td>
                     <td class="px-3 py-2">
-                        <a href="{{ route('admin.employee.show', $employee->id) }}" class="bg-blue-400 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-500 transition">
-                            Show
-                        </a>
+                        <!-- Delete Button -->
+                        <form action="{{ route('admin.employee.destroy', $employee->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-600 transition">
+                                Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

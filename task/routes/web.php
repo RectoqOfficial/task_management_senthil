@@ -45,6 +45,8 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('admin.employee.create');
     Route::post('/employees/store', [EmployeeController::class, 'store'])->name('admin.employee.store');
     Route::get('/admin/employees/{id}', [EmployeeController::class, 'show'])->name('admin.employee.show');
+    Route::delete('/admin/employees/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.destroy');
+
     
      
 
@@ -56,22 +58,11 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
         Route::post('admin/tasks/store', [TaskController::class, 'store'])->name('admin.tasks.store');
 
 
- 
-        Route::get('/score', function () {
-            return view('score.index');
-        })->name('score.index');
+// score
 
-        Route::get('/score/create', function () {
-            return view('admin.score.create');
-        })->name('admin.score.create');
+        Route::get('/scores', [ScoreController::class, 'index'])->name('score.index');
+        Route::post('/scores/update/{task_id}', [ScoreController::class, 'updateScore'])->name('score.update');;
 
-
-
-            Route::get('/score', [ScoreController::class, 'index'])->name('admin.score.index');
-            Route::get('/tasks/create', [ScoreController::class, 'create'])->name('tasks.create');
-            Route::post('/tasks', [ScoreController::class, 'store'])->name('tasks.store');
-
-        
 
 
         // employee
