@@ -26,17 +26,24 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 
 // Admin Dashboard (Protected Route)
 
+// Protected Admin Routes
+Route::middleware(['admin.auth'])->group(function () {
+    // Add any other admin protected routes here
+
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
-
-
-// middleware is pending
 
     Route::get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles.index');
     Route::get('/admin/roles/create', [RoleController::class, 'create'])->name('admin.roles.create');
     Route::post('/admin/roles', [RoleController::class, 'store'])->name('admin.roles.store');
     Route::delete('/admin/roles/{id}', [RoleController::class, 'destroy'])->name('admin.roles.destroy');
 
+});
+   
+
+
+// middleware is pending
+
+    
 
 
 // Admin Create Employee Details
@@ -75,6 +82,6 @@ Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('
 Route::post('/employee/logout', [EmployeeAuthController::class, 'logout'])->name('employee.logout');
 
 //Employee Dashboard Page
-
+Route::middleware(['employee.auth'])->group(function () {
     Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('employee.dashboard');
-
+});

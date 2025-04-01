@@ -83,9 +83,11 @@
             <input type="date" name="joining_date" class="w-full border border-gray-300 rounded-lg p-2 bg-gray-50 focus:ring focus:ring-blue-300" required>
         </div>
 
-        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 rounded-lg hover:shadow-lg transition duration-300">
+        <!-- <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 rounded-lg hover:shadow-lg transition duration-300">
             Add Employee
-        </button>
+        </button> -->
+
+        <button type="submit">test</button>
     </form>
 </div>
 
@@ -100,7 +102,7 @@
             }
         @endforeach
     });
-</script>
+</script>   
 
 </body>
 </html>

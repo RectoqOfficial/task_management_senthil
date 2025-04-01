@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 
 class Employee extends Authenticatable
 {
-    use HasFactory;
-
+    use Notifiable;
+    protected $table = 'employees';
+    protected $guard = 'employee';
     protected $fillable = [
         'name', 'email', 'password', 'contact', 'gender',
         'department', 'role_id', 'joining_date'

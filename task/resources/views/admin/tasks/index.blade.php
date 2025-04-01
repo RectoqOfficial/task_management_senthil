@@ -60,6 +60,8 @@
                     <th>Assigned To</th>
                     <th>Status</th>
                     <th>Deadline</th>
+                    <th>Total Days</th>
+
                     <th>Remarks</th>
                 </tr>
             </thead>
@@ -79,6 +81,8 @@
                             </span>
                         </td>
                         <td>{{ $task->deadline }}</td>
+                        <td>{{ $task->total_days }}</td>
+
                         <td>{{ $task->remarks }}</td>
                     </tr>
                 @endforeach

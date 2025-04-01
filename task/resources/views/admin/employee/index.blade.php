@@ -79,13 +79,15 @@
         <button id="close-modal" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Close</button>
     </div>
 </div>
-
+<!-- 
 <script>
     $(document).ready(function () {
+        // Open the modal to create a new employee
         $("#open-create-modal").click(function (e) {
             e.preventDefault();
             $("#createEmployeeModal").removeClass("hidden").addClass("opacity-100 scale-100");
 
+            // Load the create employee form via AJAX
             $.ajax({
                 url: "{{ route('admin.employee.create') }}", 
                 type: "GET",
@@ -98,11 +100,104 @@
             });
         });
 
+        // Close the modal
         $("#close-modal").click(function () {
             $("#createEmployeeModal").addClass("hidden").removeClass("opacity-100 scale-100");
         });
+
+        // Handle form submission inside the modal
+        $(document).on('submit', '#createEmployeeForm', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            var formData = $(this).serialize(); // Get the form data
+
+            $.ajax({
+                url: "{{ route('admin.employee.store') }}", // Ensure this route matches your store route
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    // If the employee is added successfully, show success message
+                    if (response.success) {
+                        $('#createEmployeeModal').addClass("hidden").removeClass("opacity-100 scale-100");
+                        // Reload the page or update the page content if needed
+                        location.reload();  // Refresh the page
+                    }
+                },
+                error: function (xhr) {
+                    // Handle any errors, like validation errors
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessages = '';
+                    $.each(errors, function (key, value) {
+                        errorMessages += '<p class="text-red-400">' + value + '</p>';
+                    });
+                    $("#modal-content").html(errorMessages); // Show validation errors in modal
+                }
+            });
+        });
+    });
+</script> -->
+<script>
+    $(document).ready(function () {
+        // Open the modal to create a new employee
+        $("#open-create-modal").click(function (e) {
+            e.preventDefault();
+            $("#createEmployeeModal").removeClass("hidden").addClass("opacity-100 scale-100");
+
+            // Load the create employee form via AJAX
+            $.ajax({
+                url: "{{ route('admin.employee.create') }}", 
+                type: "GET",
+                success: function (response) {
+                    $("#modal-content").html(response);
+                },
+                error: function () {
+                    $("#modal-content").html("<p class='text-red-400'>Failed to load Create Employee form.</p>");
+                }
+            });
+        });
+
+        // Close the modal
+        $("#close-modal").click(function () {
+            $("#createEmployeeModal").addClass("hidden").removeClass("opacity-100 scale-100");
+        });
+
+        // Handle form submission inside the modal
+        $(document).on('submit', '#createEmployeeForm', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            var formData = $(this).serialize(); // Get the form data
+
+            $.ajax({
+                url: "{{ route('admin.employee.store') }}", // Ensure this route matches your store route
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    // If the employee is added successfully, show success message
+                    if (response.success) {
+                        alert(response.message); // Show success message
+                        // Optionally reset the form and close the modal
+                        $('#createEmployeeForm')[0].reset();
+                        $("#createEmployeeModal").addClass("hidden").removeClass("opacity-100 scale-100");
+                    } else {
+                        alert('There was an issue creating the employee.');
+                    }
+                },
+                error: function (xhr) {
+                    // Handle any errors, like validation errors
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessages = '';
+                    $.each(errors, function (key, value) {
+                        errorMessages += '<p class="text-red-400">' + value + '</p>';
+                    });
+                    $("#modal-content").html(errorMessages); // Show validation errors in modal
+                }
+            });
+        });
     });
 </script>
+
+
+
 
 </body>
 </html>

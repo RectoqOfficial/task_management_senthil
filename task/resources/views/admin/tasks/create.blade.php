@@ -94,6 +94,12 @@
     </div>
 
     <div class="mb-2">
+    <label for="total_days">Total Days</label>
+    <input type="number" name="total_days" class="form-control" required>
+</div>
+
+
+    <div class="mb-2">
         <label for="remarks">Remarks</label>
         <textarea name="remarks" class="form-control" rows="1"></textarea>
     </div>

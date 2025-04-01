@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\AdminAuthenticated;
+use App\Http\Middleware\EmployeeAuthenticated;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,8 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Registering middleware alias
+        $middleware->alias([
+            'admin.auth' => AdminAuthenticated::class, // Correct middleware alias
+            'employee.auth' => EmployeeAuthenticated::class, // Correct middleware alias
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    }) // <-- Add semicolon here
+    ->create();

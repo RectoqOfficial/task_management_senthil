@@ -23,32 +23,36 @@ class EmployeeController extends Controller
     }
 
 //Employee Store Database
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:employees',
-            'password' => 'required',
-            'contact' => 'required',
-            'gender' => 'required',
-            'department' => 'required',
-            'role_id' => 'required|exists:roles,id',
-            'joining_date' => 'required|date'
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:employees',
+        'password' => 'required',
+        'contact' => 'required',
+        'gender' => 'required',
+        'department' => 'required',
+        'role_id' => 'required|exists:roles,id',
+        'joining_date' => 'required|date'
+    ]);
 
-        Employee::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'contact' => $request->contact,
-            'gender' => $request->gender,
-            'department' => $request->department,
-            'role_id' => $request->role_id,
-            'joining_date' => $request->joining_date,
-        ]);
+    Employee::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'contact' => $request->contact,
+        'gender' => $request->gender,
+        'department' => $request->department,
+        'role_id' => $request->role_id,
+        'joining_date' => $request->joining_date,
+    ]);
 
-        return redirect()->route('admin.employee.index')->with('success', 'Employee added successfully!');
-    }
+    // Return a JSON response indicating success
+    return response()->json(['success' => true, 'message' => 'Employee added successfully!']);
+}
+
+
+
     
     public function show($id)
 {
