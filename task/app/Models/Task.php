@@ -3,12 +3,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Task extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['task_title', 'description', 'employee_id', 'status', 'deadline', 'task_start_date', 'total_days', 'remarks'];
+    protected $fillable = ['task_title', 'description', 'employee_id', 'status', 'task_start_date','deadline', 'total_days', 'remarks'];
 
     public function employee()
     {
@@ -19,4 +20,16 @@ class Task extends Model
     {
         return $this->hasOne(Score::class, 'task_id');
     }
+
+ 
+
+public function getComputedDeadlineAttribute()
+{
+    if ($this->task_start_date && $this->total_days) {
+        return Carbon::parse($this->task_start_date)->addDays($this->total_days)->format('Y-m-d');
+    }
+    return null; // If values are missing, return null
+}
+
+    
 }

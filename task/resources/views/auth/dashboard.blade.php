@@ -15,21 +15,19 @@
     <!-- Sidebar -->
     <div class="w-64 min-h-screen bg-gradient-to-b from-blue-800 to-blue-900 text-white p-5 shadow-lg">
         <div class="text-center mb-6">
-            <h2 class="text-lg font-semibold">Welcome</h2>
+            <h2 class="text-lg font-semibold">Employee Dashboard</h2>
         </div>
         <nav class="space-y-2">
-         
-            <a href= "{{ route('admin.employee.index') }}" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                <i class="bi bi-people mr-2"></i> My Profile
-            </a>
-            <a href= class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                <i class="bi bi-list-task mr-2"></i> My task
+            <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <i class="bi bi-person mr-2"></i> My Profile
             </a>
             <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                <i class="bi bi-trophy mr-2"></i> Myscore Board
+                <i class="bi bi-list-task mr-2"></i> My Tasks
             </a>
-           
-            <form action="{{ route('admin.logout') }}" method="POST" class="mt-6">
+            <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <i class="bi bi-trophy mr-2"></i> My Score Board
+            </a>
+            <form action="{{ route('employee.logout') }}" method="POST" class="mt-6">
                 @csrf
                 <button type="submit" class="w-full flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition">
                     <i class="bi bi-box-arrow-right mr-2"></i> Logout
@@ -41,8 +39,8 @@
     <!-- Main Content -->
     <div class="flex-1 p-10">
         <div class="bg-white shadow-lg rounded-lg p-6">
-            <h2 class="text-2xl font-bold text-gray-700 text-center">Employee Dashboard</h2>
-            <p class="text-gray-600 text-center mt-2">Welcome, Employee!</p>
+            <h2 class="text-2xl font-bold text-gray-700 text-center">Welcome, Employee!</h2>
+            <p class="text-gray-600 text-center mt-2">Manage your tasks and performance here.</p>
         </div>
     </div>
 

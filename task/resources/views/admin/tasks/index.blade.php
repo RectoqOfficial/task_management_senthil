@@ -4,114 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task List</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 900px;
-        }
-        .table-container {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        thead {
-            background-color: #343a40;
-            color: white;
-        }
-        .status-badge {
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-        .status-pending { background-color: #ffc107; color: #212529; }
-        .status-inprogress { background-color: #17a2b8; color: white; }
-        .status-completed { background-color: #28a745; color: white; }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-6 font-sans text-gray-300">
 
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-0 text-primary fw-bold">Task List</h2>
-        <button id="load-create-task" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#taskModal">+ Create Task</button>
+<div class="max-w-6xl mx-auto bg-gray-800 shadow-lg rounded-lg p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-3xl font-semibold text-white flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-blue-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a4 4 0 10-8 0v2M5 21h14a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
+            </svg>
+            Task List
+        </h2>
+        <button id="load-create-task" class="bg-purple-500 text-white px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-purple-600 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            Create Task
+        </button>
     </div>
 
-    <div class="table-container">
-        <table class="table table-bordered table-hover text-center">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Task Title</th>
-                    <th>Description</th>
-                    <th>Assigned To</th>
-                    <th>Status</th>
-                    <th>Deadline</th>
-                    <th>Total Days</th>
+    <div class="overflow-x-auto">
+        <table class="w-full rounded-lg overflow-hidden shadow-md text-gray-300 border border-gray-600">
+        <thead>
+    <tr class="bg-purple-500 text-white text-left text-sm border-b border-gray-400">
+        <th class="px-3 py-2 border border-gray-400">ID</th>
+        <th class="px-3 py-2 border border-gray-400">Task Title</th>
+        <th class="px-3 py-2 border border-gray-400">Description</th>
+        <th class="px-3 py-2 border border-gray-400">Assigned To (Email)</th>
+        <th class="px-3 py-2 border border-gray-400">Status</th>
+        <th class="px-3 py-2 border border-gray-400">Start Date</th>
+        <th class="px-3 py-2 border border-gray-400">Deadline</th>
+        <th class="px-3 py-2 border border-gray-400">Total Days</th>
+        <th class="px-3 py-2 border border-gray-400">Remarks</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach ($tasks as $task)
+    <tr class="bg-gray-800 border-b border-gray-500 hover:bg-gray-700 transition">
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->id }}</td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_title }}</td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->description }}</td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">
+            {{ $task->employee->name }} <br>
+            <small class="text-gray-300">{{ $task->employee->email }}</small>
+        </td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">
+            <select class="status-dropdown bg-gray-800 text-white px-2 py-1 rounded" data-task-id="{{ $task->id }}">
+                <option value="Pending" {{ $task->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                <option value="In Progress" {{ $task->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+                <option value="Completed" {{ $task->status == 'Completed' ? 'selected' : '' }}>Completed</option>
+            </select>
+        </td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_start_date }}</td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->computed_deadline }}</td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->total_days }}</td>
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->remarks }}</td>
+    </tr>
+    @endforeach
+</tbody>
 
-                    <th>Remarks</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($tasks as $task)
-                    <tr>
-                        <td>{{ $task->id }}</td>
-                        <td>{{ $task->task_title }}</td>
-                        <td>{{ $task->description }}</td>
-                        <td>{{ $task->employee->name }}</td>
-                        <td>
-                            <span class="status-badge 
-                                {{ $task->status == 'Pending' ? 'status-pending' : 
-                                ($task->status == 'In Progress' ? 'status-inprogress' : 
-                                'status-completed') }}">
-                                {{ $task->status }}
-                            </span>
-                        </td>
-                        <td>{{ $task->deadline }}</td>
-                        <td>{{ $task->total_days }}</td>
-
-                        <td>{{ $task->remarks }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
 </div>
 
-<!-- Bootstrap Modal for Create Task Form -->
-<div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Create Task</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body" id="modal-body-content">
-        <!-- Form will be loaded here via AJAX -->
-      </div>
+<!-- Modal for Creating Task -->
+<div id="taskModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity">
+    <div class="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-xl w-96 transform scale-95 transition-transform">
+        <h3 class="text-lg font-bold mb-4 text-white">Create Task</h3>
+        <div id="modal-body-content">
+            <p>Loading...</p>
+        </div>
+        <button id="close-modal" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Close</button>
     </div>
-  </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     $(document).ready(function () {
         $("#load-create-task").click(function (e) {
             e.preventDefault();
+            $("#taskModal").removeClass("hidden").addClass("opacity-100 scale-100");
 
             $.ajax({
                 url: "{{ route('admin.tasks.create') }}", 
@@ -120,30 +92,13 @@
                     $("#modal-body-content").html(response);
                 },
                 error: function () {
-                    alert("Failed to load Create Task form.");
+                    $("#modal-body-content").html("<p class='text-red-400'>Failed to load Create Task form.</p>");
                 }
             });
         });
 
-        // Handle Task Form Submission via AJAX
-        $(document).on("submit", "#task-form", function (e) {
-            e.preventDefault();
-
-            let formData = $(this).serialize();
-
-            $.ajax({
-                url: "{{ route('admin.tasks.store') }}",
-                type: "POST",
-                data: formData,
-                success: function (response) {
-                    alert("Task Created Successfully!");
-                    $("#taskModal").modal("hide");
-                    location.reload();
-                },
-                error: function () {
-                    alert("Error creating task.");
-                }
-            });
+        $("#close-modal").click(function () {
+            $("#taskModal").addClass("hidden").removeClass("opacity-100 scale-100");
         });
     });
 </script>
