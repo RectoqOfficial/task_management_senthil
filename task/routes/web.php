@@ -63,7 +63,13 @@ Route::middleware(['admin.auth'])->group(function () {
         Route::get('admin/tasks', [TaskController::class, 'index'])->name('admin.tasks.index');
         Route::get('admin/tasks/create', [TaskController::class, 'create'])->name('admin.tasks.create');
         Route::post('admin/tasks/store', [TaskController::class, 'store'])->name('admin.tasks.store');
-        
+        Route::get('/employee/tasks', [TaskController::class, 'getEmployeeTasks'])->name('user.mytask');
+
+        Route::get('/employee/my-tasks', function () {
+            return view('admin.user.mytask');
+        });
+        Route::get('/employee/my-tasks', [TaskController::class, 'showEmployeeTasks'])->name('user.mytask.view');
+
 
 
 // score

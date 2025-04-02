@@ -23,4 +23,9 @@ class Employee extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function tasks()
+{
+    return $this->hasMany(Task::class, 'employee_id');
+}
+
 }

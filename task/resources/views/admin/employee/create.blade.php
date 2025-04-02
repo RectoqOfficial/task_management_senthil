@@ -15,6 +15,8 @@
 </head>
 <body class="bg-gradient-to-r from-green-500 to-indigo-600 flex items-center justify-center min-h-screen p-4">
 
+
+
 <div class="w-full max-w-2xl bg-white shadow-xl rounded-lg p-6">
     <h2 class="text-2xl font-bold mb-4 text-gray-800 text-center flex items-center justify-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7 text-blue-600">
@@ -83,11 +85,11 @@
             <input type="date" name="joining_date" class="w-full border border-gray-300 rounded-lg p-2 bg-gray-50 focus:ring focus:ring-blue-300" required>
         </div>
 
-        <!-- <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 rounded-lg hover:shadow-lg transition duration-300">
+        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 rounded-lg hover:shadow-lg transition duration-300">
             Add Employee
-        </button> -->
+        </button>
 
-        <button type="submit">test</button>
+        
     </form>
 </div>
 

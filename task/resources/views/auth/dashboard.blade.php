@@ -21,9 +21,13 @@
             <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 <i class="bi bi-person mr-2"></i> My Profile
             </a>
-            <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                <i class="bi bi-list-task mr-2"></i> My Tasks
-            </a>
+            <li>
+    <a href="{{ url('/employee/my-tasks') }}" id="myTasksBtn" 
+        class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+        <i class="bi bi-list-task mr-2"></i> My Tasks
+    </a>
+</li>
+
             <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 <i class="bi bi-trophy mr-2"></i> My Score Board
             </a>
@@ -42,7 +46,23 @@
             <h2 class="text-2xl font-bold text-gray-700 text-center">Welcome, Employee!</h2>
             <p class="text-gray-600 text-center mt-2">Manage your tasks and performance here.</p>
         </div>
+
+        <!-- This div will load the task table dynamically -->
+<div id="taskContainer"></div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $("#myTasksBtn").click(function (event) {
+            event.preventDefault(); // Prevents default page reload
+            window.location.href = "{{ url('/employee/my-tasks') }}"; // Redirects to My Tasks page
+        });
+    });
+</script>
+
+
 
 </body>
 </html>

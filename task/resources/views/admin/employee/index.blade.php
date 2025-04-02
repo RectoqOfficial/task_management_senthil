@@ -55,16 +55,19 @@
         </div>
     </div>
 
-    <!-- Modal for Creating Employee -->
-    <div id="createEmployeeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-xl w-96">
-            <h3 class="text-lg font-bold mb-4">Add Employee</h3>
-            <div id="modal-content">
-                <p>Loading...</p>
-            </div>
-            <button id="close-modal" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Close</button>
+
+<!-- Modal for Creating Employee -->
+<div id="createEmployeeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-gray-900 text-gray-300 p-4 rounded-lg shadow-xl w-80 max-h-48 flex flex-col justify-center items-center">
+        <h3 class="text-lg font-bold mb-2">Add Employee</h3>
+        <div id="modal-content">
+            <p>Loading...</p>
         </div>
+        <button id="close-modal" class="mt-2 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">Close</button>
     </div>
+</div>
+
+
 
     <script>
         $(document).ready(function () {
