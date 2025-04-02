@@ -18,10 +18,16 @@
             <h2 class="text-lg font-semibold">Employee Dashboard</h2>
         </div>
         <nav class="space-y-2">
-            <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                <i class="bi bi-person mr-2"></i> My Profile
-            </a>
-            <li>
+
+    <!-- My Profile Button -->
+    <a href="{{ route('employee.profile.view') }}" class="flex items-center px-4 py-2 bg-blue-500 rounded-lg hover:bg-blue-700 transition">
+    <i class="bi bi-person mr-2"></i> My Profile
+</a>
+
+<!-- Container to Show Employee Profile -->
+<div id="profileContainer" class="mt-4"></div>
+
+ <li>
     <a href="{{ url('/employee/my-tasks') }}" id="myTasksBtn" 
         class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
         <i class="bi bi-list-task mr-2"></i> My Tasks
@@ -50,19 +56,5 @@
         <!-- This div will load the task table dynamically -->
 <div id="taskContainer"></div>
     </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function () {
-        $("#myTasksBtn").click(function (event) {
-            event.preventDefault(); // Prevents default page reload
-            window.location.href = "{{ url('/employee/my-tasks') }}"; // Redirects to My Tasks page
-        });
-    });
-</script>
-
-
-
 </body>
 </html>

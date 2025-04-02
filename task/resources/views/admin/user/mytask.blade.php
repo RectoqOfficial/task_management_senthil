@@ -56,41 +56,47 @@
         });
 
         function LoadMyTask() {
-            $.ajax({
-                url: "{{ route('user.mytask.view') }}", // Ensure correct route
-                type: "GET",
-                dataType: "json",
-                success: function (tasks) {
-                    console.log("Tasks received:", tasks); // Debugging: Check received tasks in the console
+    let url = $("#myTasksBtn").data("url"); // Get route from button attribute
 
-                    let rows = '';
-                    if (tasks.length > 0) {
-                        tasks.forEach(task => {
-                            rows += `
-                                <tr class="bg-gray-800 border-b border-gray-500 hover:bg-gray-700 transition">
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.id}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_title}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.description}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.status}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_start_date}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.computed_deadline}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.total_days}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.remarks}</td>
-                                </tr>
-                            `;
-                        });
-                    } else {
-                        rows = `<tr><td colspan="8" class="text-center text-gray-400">No tasks found.</td></tr>`;
-                    }
+    $.ajax({
+        url: url, // Dynamic route
+        type: "GET",
+        dataType: "json",
+        success: function (tasks) {
+            console.log("✅ Tasks received:", tasks); // Debugging
 
-                    $("#task-table-body").html(rows); // Inject tasks into the table
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error fetching tasks:", xhr.responseText);
-                    alert("Failed to load tasks.");
-                }
-            });
+            let rows = '';
+            if (tasks.length > 0) {
+                tasks.forEach(task => {
+                    console.log("Adding task to table:", task); // Debugging
+                    rows += `
+                        <tr class="bg-gray-800 border-b border-gray-500 hover:bg-gray-700 transition">
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.id}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_title}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.description}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.status}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_start_date}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.computed_deadline}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.total_days}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.remarks}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                console.warn("⚠️ No tasks found!");
+                rows = `<tr><td colspan="8" class="text-center text-gray-400">No tasks found.</td></tr>`;
+            }
+
+            $("#task-table-body").html(rows); // Inject tasks into the table
+            console.log("✅ Table updated!");
+        },
+        error: function (xhr, status, error) {
+            console.error("❌ Error fetching tasks:", xhr.responseText);
+            alert("Failed to load tasks. Check console for details.");
         }
+    });
+}
+                
     </script>
 
 </body>

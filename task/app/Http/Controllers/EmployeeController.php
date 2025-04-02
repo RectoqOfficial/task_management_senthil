@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmployeeController extends Controller
 {
@@ -52,14 +54,6 @@ public function store(Request $request)
 }
 
 
-
-    
-    public function show($id)
-{
-    $employee = Employee::with('role')->findOrFail($id);
-    return view('admin.employee.show', compact('employee'));
-}
-
 // Employee Delete
 
 public function destroy($id)
@@ -70,4 +64,28 @@ public function destroy($id)
     return response()->json(['message' => 'Employee deleted successfully!']);
 }
 
+
+
+public function showProfile(Request $request)
+{
+   
+        // Get the authenticated employee using the 'employee' guard
+        $employee = Auth::guard('employee')->user(); 
+    
+        // Check if an employee is authenticated
+        if (!$employee) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+    
+        // Return employee details as JSON
+        return response()->json([
+            'id' => $employee->id,
+            'name' => $employee->name,
+            'email' => $employee->email,
+            'contact' => $employee->contact,
+            'department' => $employee->department,
+            'role' => $employee->role->role ?? 'N/A', 
+            'joining_date' => $employee->joining_date,
+        ]);
+    }
 }

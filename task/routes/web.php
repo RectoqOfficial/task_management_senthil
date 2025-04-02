@@ -54,7 +54,17 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('/admin/employees/{id}', [EmployeeController::class, 'show'])->name('admin.employee.show');
     Route::delete('/admin/employees/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.destroy');
 
+ 
+
+Route::get('/employee/profile-view', function () {
+    return view('admin.employee.profile');
+})->name('employee.profile.view');
+
+Route::get('/employee/profile', [EmployeeController::class, 'showProfile'])
+    ->name('employee.profile');
+
     
+
      
 
 
@@ -64,10 +74,6 @@ Route::middleware(['admin.auth'])->group(function () {
         Route::get('admin/tasks/create', [TaskController::class, 'create'])->name('admin.tasks.create');
         Route::post('admin/tasks/store', [TaskController::class, 'store'])->name('admin.tasks.store');
         Route::get('/employee/tasks', [TaskController::class, 'getEmployeeTasks'])->name('user.mytask');
-
-        Route::get('/employee/my-tasks', function () {
-            return view('admin.user.mytask');
-        });
         Route::get('/employee/my-tasks', [TaskController::class, 'showEmployeeTasks'])->name('user.mytask.view');
 
 

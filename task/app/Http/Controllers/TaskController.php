@@ -44,21 +44,31 @@ class TaskController extends Controller
 
         return redirect()->route('admin.tasks.index')->with('success', 'Task created successfully!');
     }
+    
+    
     public function showEmployeeTasks(Request $request)
-    {
-        if (!Auth::guard('employee')->check()) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-    
-        $employee = Auth::guard('employee')->user();
-        $tasks = Task::where('employee_id', $employee->id)->get();
-    
-        if ($request->ajax()) {
-            return response()->json($tasks); // Return JSON for AJAX
-        }
-    
-        return view('admin.user.mytask', compact('tasks'));
+{
+    if (!Auth::guard('employee')->check()) {
+        \Log::error('Unauthorized access attempt to showEmployeeTasks');
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
+
+    $employee = Auth::guard('employee')->user();
+    \Log::info("Fetching tasks for employee ID: {$employee->id}");
+
+    $tasks = Task::where('employee_id', $employee->id)->get();
+
+    \Log::info('Tasks retrieved:', $tasks->toArray());
+
+    if ($request->ajax()) {
+        return response()->json($tasks);
+    }
+
+    return view('admin.user.mytask', compact('tasks'));
+}
+
+
+
     
 
 

@@ -8,9 +8,14 @@ use Carbon\Carbon;
 class Task extends Model
 {
     use HasFactory;
+
     
     protected $fillable = ['task_title', 'description', 'employee_id', 'status', 'task_start_date','deadline', 'total_days', 'remarks'];
 
+    protected $appends = ['computed_deadline']; // Ensure computed attribute is included in JSON
+
+    
+    
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'employee_id');
