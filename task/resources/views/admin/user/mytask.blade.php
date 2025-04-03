@@ -55,11 +55,12 @@
             });
         });
 
+        
         function LoadMyTask() {
-    let url = $("#myTasksBtn").data("url"); // Get route from button attribute
+    let url = $("#myTasksBtn").data("url"); // Ensure the correct URL is set in the button
 
     $.ajax({
-        url: url, // Dynamic route
+        url: url,
         type: "GET",
         dataType: "json",
         success: function (tasks) {
@@ -68,13 +69,23 @@
             let rows = '';
             if (tasks.length > 0) {
                 tasks.forEach(task => {
-                    console.log("Adding task to table:", task); // Debugging
+                    console.log("🔹 Task:", task); // Check if task contains `status`
+
                     rows += `
                         <tr class="bg-gray-800 border-b border-gray-500 hover:bg-gray-700 transition">
                             <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.id}</td>
                             <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_title}</td>
                             <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.description}</td>
-                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.status}</td>
+
+                            <!-- Status Dropdown -->
+                            <td class="px-3 py-2 border border-gray-400">
+                                <select class="status-dropdown bg-gray-700 text-white px-2 py-1 rounded w-full" data-task-id="${task.id}">
+                                    <option value="Pending" ${(task.status === 'Pending') ? 'selected' : ''}>Pending</option>
+                                    <option value="In Progress" ${(task.status === 'In Progress') ? 'selected' : ''}>In Progress</option>
+                                    <option value="Completed" ${(task.status === 'Completed') ? 'selected' : ''}>Completed</option>
+                                </select>
+                            </td>
+
                             <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_start_date}</td>
                             <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.computed_deadline}</td>
                             <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.total_days}</td>
@@ -96,7 +107,7 @@
         }
     });
 }
-                
+
     </script>
 
 </body>
