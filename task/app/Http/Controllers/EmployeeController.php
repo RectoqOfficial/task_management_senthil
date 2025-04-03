@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Task;
 
 
 class EmployeeController extends Controller
@@ -88,4 +89,17 @@ public function showProfile(Request $request)
             'joining_date' => $employee->joining_date,
         ]);
     }
+
+
+    public function showScorePage()
+{
+    $employeeId = Auth::guard('employee')->id();
+    
+    // Fetch tasks assigned to the logged-in employee along with their scores
+    $tasks = Task::where('employee_id', $employeeId)
+                ->with('score')
+                ->get();
+
+    return view('admin.score.scores', compact('tasks'));
+}
 }

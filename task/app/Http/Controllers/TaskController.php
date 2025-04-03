@@ -34,9 +34,9 @@ class TaskController extends Controller
             'description' => 'required',
             'employee_id' => 'required|exists:employees,id',
             'status' => 'required|in:Pending,Ongoing,Completed',
-            'deadline' => 'required|date',
-            'task_start_date' => 'required|date',
-            'total_days' => 'required|integer',
+            'deadline' => 'nullable|date',
+            'task_start_date' => 'nullable|date',
+            'total_days' => 'nullable|integer',
             'remarks' => 'nullable|string',
         ]);
 
@@ -44,6 +44,7 @@ class TaskController extends Controller
 
         return redirect()->route('admin.tasks.index')->with('success', 'Task created successfully!');
     }
+    
     
     
     public function showEmployeeTasks(Request $request)
@@ -68,6 +69,21 @@ class TaskController extends Controller
 }
 
 
+public function updateTask(Request $request)
+{
+    $request->validate([
+        'task_id' => 'required|exists:tasks,id',
+        'status' => 'required|in:Pending,In Progress,Completed',
+        'task_start_date' => 'nullable|date',
+    ]);
+
+    $task = Task::findOrFail($request->task_id);
+    $task->status = $request->status;
+    $task->task_start_date = $request->task_start_date;
+    $task->save();
+
+    return response()->json(['message' => 'Task updated successfully!']);
+}
 
     
 

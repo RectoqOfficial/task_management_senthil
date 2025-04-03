@@ -37,10 +37,13 @@
                 class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 <i class="bi bi-list-task mr-2"></i> My Tasks
             </a>
+<!-- My Score Board Button -->
 
-            <a href="#" class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                <i class="bi bi-trophy mr-2"></i> My Score Board
-            </a>
+
+<a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}" 
+   class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+    <i class="bi bi-trophy mr-2"></i> My Score Board
+</a>
 
             <!-- Logout Form -->
             <form action="{{ route('employee.logout') }}" method="POST" class="mt-6">
@@ -63,6 +66,9 @@
 
             <!-- Task Container -->
             <div id="taskContainer"></div>
+
+ <!-- Container where the scoreboard will be displayed -->
+<div id="scoreContainer"></div>
         </div>
     </div>
 
@@ -171,6 +177,30 @@
                 }
             });
         }
+
+
+        // score
+        $(document).ready(function () {
+    $("#myScoreBtn").on("click", function (event) {
+        event.preventDefault();
+        LoadMyScore();
+    });
+});
+
+function LoadMyScore() {
+    let url = $("#myScoreBtn").data("url");
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (html) {
+            $("#scoreContainer").html(html);
+        },
+        error: function () {
+            alert("Failed to load scores.");
+        }
+    });
+}
     </script>
 
 </body>

@@ -102,9 +102,7 @@
             $("#taskModal").addClass("hidden").removeClass("opacity-100 scale-100");
         });
     });
-
-
-
+    
     
 </script>
 

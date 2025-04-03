@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Score;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ScoreController extends Controller
 {
@@ -43,5 +45,20 @@ class ScoreController extends Controller
 
         $score->save();
         return redirect()->route('score.index')->with('success', 'Score updated successfully.');
+    }
+    public function showScorePage()
+    {
+        try {
+            $employeeId = Auth::guard('employee')->id();
+    
+            $tasks = Task::where('employee_id', $employeeId)
+                        ->with('score') // Ensure the 'score' relationship exists
+                        ->get();
+    
+            return response()->json($tasks); // Return JSON data for AJAX
+        } catch (\Exception $e) {
+            Log::error('Scoreboard error: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to load scores.'], 500);
+        }
     }
 }

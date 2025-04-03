@@ -75,13 +75,14 @@ Route::get('/employee/profile', [EmployeeController::class, 'showProfile'])
         Route::post('admin/tasks/store', [TaskController::class, 'store'])->name('admin.tasks.store');
         Route::get('/employee/tasks', [TaskController::class, 'getEmployeeTasks'])->name('user.mytask');
         Route::get('/employee/my-tasks', [TaskController::class, 'showEmployeeTasks'])->name('user.mytask.view');
-
+        Route::post('/update-task', [TaskController::class, 'updateTask'])->name('update.task');
 
 
 // score
 
         Route::get('/scores', [ScoreController::class, 'index'])->name('score.index');
         Route::post('/scores/update/{task_id}', [ScoreController::class, 'updateScore'])->name('score.update');;
+        Route::get('/my-score', [EmployeeController::class, 'showScorePage'])->name('employee.myscore.view');
 
 
 
