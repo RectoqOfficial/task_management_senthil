@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -80,12 +80,12 @@
                 <input type="text" class="form-control" id="department" name="department" required>
             </div>
             <button type="submit" class="btn btn-success">Create Role</button>
-        </form>
+        </form> -->
 
         <!-- Success Message (Initially Hidden) -->
-        <div id="success-message" class="alert alert-success mt-3" style="display: none;">
+        <!-- <div id="success-message" class="alert alert-success mt-3" style="display: none;">
             Role created successfully!
         </div>
     </div>
 </body>
-</html>
+</html> -->

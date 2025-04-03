@@ -48,67 +48,66 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h5 class="text-center text-primary fw-bold mb-2">Create Task</h5>
-        <form id="task-form" action="{{ route('admin.tasks.store') }}" method="POST">
-    @csrf
+<div class="container">
+    <h5 class="text-center text-primary fw-bold text-sm mb-1">Create Task</h5>
+    <form id="task-form" action="{{ route('admin.tasks.store') }}" method="POST">
+        @csrf
 
-    <div class="mb-2">
-        <label for="task_title">Task Title</label>
-        <input type="text" name="task_title" class="form-control" required>
-    </div>
+        <div class="space-y-1 text-sm">
+            <div>
+                <label for="task_title" class="text-xs">Task Title</label>
+                <input type="text" name="task_title" class="form-control py-1 text-xs" required>
+            </div>
 
-    <div class="mb-2">
-        <label for="description">Description</label>
-        <textarea name="description" class="form-control" rows="2" required></textarea>
-    </div>
+            <div>
+                <label for="description" class="text-xs">Description</label>
+                <textarea name="description" class="form-control py-1 text-xs" rows="1" required></textarea>
+            </div>
 
-    <div class="mb-2">
-        <label for="employee_id">Assign To</label>
-        <select name="employee_id" class="form-control" required>
-            <option value="">Select Employee</option>
-            @foreach ($employees as $employee)
-                <option value="{{ $employee->id }}">{{ $employee->name }}</option>
-            @endforeach
-        </select>
-    </div>
+            <div>
+                <label for="employee_id" class="text-xs">Assign To</label>
+                <select name="employee_id" class="form-control py-1 text-xs" required>
+                    <option value="">Select Employee</option>
+                    @foreach ($employees as $employee)
+                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-    <div class="mb-2">
-        <label for="status">Status</label>
-        <select name="status" class="form-control" required>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-        </select>
-    </div>
+            <div>
+                <label for="status" class="text-xs">Status</label>
+                <select name="status" class="form-control py-1 text-xs" required>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
 
-    <div class="row">
-        <div class="col-6 mb-2">
-            <label for="deadline">Deadline</label>
-            <input type="date" name="deadline" class="form-control" required>
+            <div class="row">
+                <div class="col-6">
+                    <label for="deadline" class="text-xs">Deadline</label>
+                    <input type="date" name="deadline" class="form-control py-1 text-xs" required>
+                </div>
+                <div class="col-6">
+                    <label for="task_start_date" class="text-xs">Start Date</label>
+                    <input type="date" name="task_start_date" class="form-control py-1 text-xs" required>
+                </div>
+            </div>
+
+            <div>
+                <label for="total_days" class="text-xs">Total Days</label>
+                <input type="number" name="total_days" class="form-control py-1 text-xs" required>
+            </div>
+
+            <div>
+                <label for="remarks" class="text-xs">Remarks</label>
+                <textarea name="remarks" class="form-control py-1 text-xs" rows="1"></textarea>
+            </div>
         </div>
-        <div class="col-6 mb-2">
-            <label for="task_start_date">Start Date</label>
-            <input type="date" name="task_start_date" class="form-control" required>
-        </div>
-    </div>
 
-    <div class="mb-2">
-    <label for="total_days">Total Days</label>
-    <input type="number" name="total_days" class="form-control" required>
+        <button type="submit" class="btn btn-success w-100 text-xs mt-1 py-1">Create Task</button>
+    </form>
 </div>
-
-
-    <div class="mb-2">
-        <label for="remarks">Remarks</label>
-        <textarea name="remarks" class="form-control" rows="1"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-success w-100">Create Task</button>
-</form>
-  
-
-    </div>
 </body>
 </html>
 

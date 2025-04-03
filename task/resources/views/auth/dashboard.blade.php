@@ -56,11 +56,50 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-10">
+ <!-- Main Content -->
+ <div class="flex-1 p-10">
         <div class="bg-white shadow-lg rounded-lg p-6">
-            <h2 class="text-2xl font-bold text-gray-700 text-center">Welcome, {{ Auth::guard('employee')->user()->name }}!</h2>
+            <h2 class="text-2xl font-bold text-gray-700 text-center">
+                Welcome, {{ Auth::guard('employee')->user()->name }}!
+            </h2>
             <p class="text-gray-600 text-center mt-2">Manage your tasks and performance here.</p>
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+                <!-- Total Tasks -->
+                <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="text-sm sm:text-lg font-semibold text-white">Total Tasks</h3>
+                    <p class="text-2xl sm:text-3xl font-bold text-blue-400">{{ $totalTasks ?? '0'}}</p>
+                </div>
+
+                <!-- Pending Tasks -->
+                <div class="bg-yellow-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="text-sm sm:text-lg font-semibold text-white">Pending Tasks</h3>
+                    <p class="text-2xl sm:text-3xl font-bold">{{ $pendingTasks ?? '4' }}</p>
+                </div>
+
+                <!-- Started Tasks -->
+                <div class="bg-blue-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="text-sm sm:text-lg font-semibold text-white">Started Tasks</h3>
+                    <p class="text-2xl sm:text-3xl font-bold">{{ $startedTasks ?? '5' }}</p>
+                </div>
+
+                <!-- Completed Tasks -->
+                <div class="bg-green-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="text-sm sm:text-lg font-semibold text-white">Completed Tasks</h3>
+                    <p class="text-2xl sm:text-3xl font-bold">{{ $completedTasks ?? '7' }}</p>
+                </div>
+
+                <!-- Review Tasks -->
+                <div class="bg-purple-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="text-sm sm:text-lg font-semibold text-white">Tasks in Review</h3>
+                    <p class="text-2xl sm:text-3xl font-bold">{{ $reviewTasks ?? '8' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <p class="mt-2 text-gray-400 text-center text-sm sm:text-base">Manage your tasks efficiently.</p>
             <!-- Profile Container -->
             <div id="profileContainer" class="mt-4"></div>
 

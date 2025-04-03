@@ -68,17 +68,17 @@
 
     </div>
 </div>
-
 <!-- Modal for Creating Task -->
 <div id="taskModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity">
-    <div class="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-xl w-96 transform scale-95 transition-transform">
-        <h3 class="text-lg font-bold mb-4 text-white">Create Task</h3>
+    <div class="bg-gray-900 text-gray-300 p-3 rounded-lg shadow-xl w-80 h-auto transform scale-95 transition-transform">
+        <h3 class="text-sm font-bold mb-1 text-white">Create Task</h3>
         <div id="modal-body-content">
-            <p>Loading...</p>
+            <p class="text-xs">Loading...</p>
         </div>
-        <button id="close-modal" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Close</button>
+        <button id="close-modal" class="mt-1 bg-red-500 text-white px-2 py-1 text-xs rounded hover:bg-red-600 transition">Close</button>
     </div>
 </div>
+
 
 <script>
     $(document).ready(function () {

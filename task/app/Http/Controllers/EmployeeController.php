@@ -102,4 +102,31 @@ public function showProfile(Request $request)
 
     return view('admin.score.scores', compact('tasks'));
 }
+
+
+public function dashboard()
+{
+    // Check if the employee is authenticated
+    if (!Auth::guard('employee')->check()) {
+        return redirect()->route('employee.login')->with('error', 'Please log in to view your dashboard.');
+    }
+
+    // Get the logged-in employee
+    $employee = Auth::guard('employee')->user();
+
+    // Fetch task counts
+    $totalTasks = Task::where('assigned_to', $employee->id)->count();
+    $pendingTasks = Task::where('assigned_to', $employee->id)->where('status', 'pending')->count();
+    $startedTasks = Task::where('assigned_to', $employee->id)->where('status', 'started')->count();
+    $completedTasks = Task::where('assigned_to', $employee->id)->where('status', 'completed')->count();
+    $reviewTasks = Task::where('assigned_to', $employee->id)->where('status', 'review')->count();
+
+    // Debugging: Check if task data is retrieved
+    \Log::info("Total Tasks: {$totalTasks}, Pending: {$pendingTasks}, Started: {$startedTasks}, Completed: {$completedTasks}, Review: {$reviewTasks}");
+
+    // Return the correct view
+    return view('auth.dashboard', compact(
+        'totalTasks', 'pendingTasks', 'startedTasks', 'completedTasks', 'reviewTasks'
+    ));
+}
 }
