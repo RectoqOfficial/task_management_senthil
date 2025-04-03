@@ -118,8 +118,6 @@
     </tr>
 `;
 
-
-
                 });
             } else {
                 console.warn("⚠️ No tasks found!");

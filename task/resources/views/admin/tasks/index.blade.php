@@ -50,13 +50,13 @@
             {{ $task->employee->name }} <br>
             <small class="text-gray-300">{{ $task->employee->email }}</small>
         </td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">
-            <select class="status-dropdown bg-gray-800 text-white px-2 py-1 rounded" data-task-id="{{ $task->id }}">
+        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->status }}
+            <!-- <select class="status-dropdown bg-gray-800 text-white px-2 py-1 rounded" data-task-id="{{ $task->id }}">
                 <option value="Pending" {{ $task->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                 <option value="In Progress" {{ $task->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
                 <option value="Completed" {{ $task->status == 'Completed' ? 'selected' : '' }}>Completed</option>
                 <option value="Review" {{ $task->status == 'Review' ? 'selected' : '' }}>Review</option>
-            </select>
+            </select> -->
         </td>
         <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_start_date }}</td>
         <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->computed_deadline }}</td>

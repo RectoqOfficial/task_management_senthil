@@ -10,7 +10,7 @@
 <body class="bg-black text-white p-6">
     <div class="max-w-6xl mx-auto bg-gray-800 shadow-lg rounded-lg p-6">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-semibold text-white">Employee Scoreboard</h2>
+            <h2 class="text-3xl font-semibold text-white">Employee Details</h2>
             <button id="open-create-modal" class="bg-purple-500 text-white px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-purple-600 transition">
                 Create Employee
             </button>
@@ -57,12 +57,14 @@
 
 <!-- Modal for Creating Employee -->
 <div id="createEmployeeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-gray-900 text-gray-300 p-4 rounded-lg shadow-xl w-96 max-h-32 flex flex-col justify-center items-center">
-        <h3 class="text-lg font-bold mb-2">Add Employee</h3>
+    <div class="bg-gray-800 text-gray-100 p-3 rounded-lg shadow-xl w-96 flex flex-col items-center">
+        <h3 class="text-lg font-bold mb-2 text-white">Add Employee</h3>
         <div id="modal-content">
-            <p>Loading...</p>
+            <p class="text-gray-200">Loading...</p>
         </div>
-        <button id="close-modal" class="mt-2 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">Close</button>
+        <button id="close-modal" class="mt-2 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
+            Close
+        </button>
     </div>
 </div>
 

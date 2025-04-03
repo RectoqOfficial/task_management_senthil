@@ -6,6 +6,8 @@ use App\Models\Task;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class TaskController extends Controller
 {
@@ -42,7 +44,7 @@ class TaskController extends Controller
 
         Task::create($request->all());
 
-        return redirect()->route('admin.tasks.index')->with('success', 'Task created successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'Task added successfully');
     }
     
     
@@ -69,20 +71,29 @@ class TaskController extends Controller
 }
 
 
-public function updateTask(Request $request)
-{
-    $request->validate([
-        'task_id' => 'required|exists:tasks,id',
-        'status' => 'required|in:Pending,In Progress,Completed',
-        'task_start_date' => 'nullable|date',
-    ]);
 
-    $task = Task::findOrFail($request->task_id);
+
+public function updateTask(Request $request, $id)
+{
+    $task = Task::find($id);
+    
+    if (!$task) {
+        return response()->json(['error' => 'Task not found'], 404);
+    }
+
     $task->status = $request->status;
     $task->task_start_date = $request->task_start_date;
-    $task->save();
 
-    return response()->json(['message' => 'Task updated successfully!']);
+    // Automatically calculate deadline based on total_days if needed
+    
+
+    $task->save();
+    Log::info("After update: ", $task->toArray());
+
+
+
+
+    return response()->json(['success' => 'Task updated successfully']);
 }
 
     

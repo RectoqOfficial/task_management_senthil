@@ -33,7 +33,7 @@ class RoleController extends Controller
             'department' => $request->department,
         ]);
 
-        return redirect()->route('admin.roles.index')->with('success', 'Role added successfully');
+        return redirect()->route('admin.dashboard')->with('success', 'Role added successfully');
     }
 
     // Delete role

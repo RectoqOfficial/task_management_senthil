@@ -50,8 +50,8 @@ public function store(Request $request)
         'joining_date' => $request->joining_date,
     ]);
 
-    // Return a JSON response indicating success
-    return response()->json(['success' => true, 'message' => 'Employee added successfully!']);
+    return redirect()->route('admin.dashboard')->with('success', 'Employee added successfully');
+
 }
 
 
@@ -62,7 +62,7 @@ public function destroy($id)
     $employee = Employee::findOrFail($id);
     $employee->delete();
 
-    return response()->json(['message' => 'Employee deleted successfully!']);
+        return redirect()->route('admin.dashboard')->with('success', 'Delete successfully');
 }
 
 
@@ -104,29 +104,29 @@ public function showProfile(Request $request)
 }
 
 
-public function dashboard()
-{
-    // Check if the employee is authenticated
-    if (!Auth::guard('employee')->check()) {
-        return redirect()->route('employee.login')->with('error', 'Please log in to view your dashboard.');
-    }
+// public function dashboard()
+// {
+//     // Check if the employee is authenticated
+//     if (!Auth::guard('employee')->check()) {
+//         return redirect()->route('employee.login')->with('error', 'Please log in to view your dashboard.');
+//     }
 
-    // Get the logged-in employee
-    $employee = Auth::guard('employee')->user();
+//     // Get the logged-in employee
+//     $employee = Auth::guard('employee')->user();
 
-    // Fetch task counts
-    $totalTasks = Task::where('assigned_to', $employee->id)->count();
-    $pendingTasks = Task::where('assigned_to', $employee->id)->where('status', 'pending')->count();
-    $startedTasks = Task::where('assigned_to', $employee->id)->where('status', 'started')->count();
-    $completedTasks = Task::where('assigned_to', $employee->id)->where('status', 'completed')->count();
-    $reviewTasks = Task::where('assigned_to', $employee->id)->where('status', 'review')->count();
+//     // Fetch task counts
+//     $totalTasks = Task::where('assigned_to', $employee->id)->count();
+//     $pendingTasks = Task::where('assigned_to', $employee->id)->where('status', 'pending')->count();
+//     $startedTasks = Task::where('assigned_to', $employee->id)->where('status', 'started')->count();
+//     $completedTasks = Task::where('assigned_to', $employee->id)->where('status', 'completed')->count();
+//     $reviewTasks = Task::where('assigned_to', $employee->id)->where('status', 'review')->count();
 
-    // Debugging: Check if task data is retrieved
-    \Log::info("Total Tasks: {$totalTasks}, Pending: {$pendingTasks}, Started: {$startedTasks}, Completed: {$completedTasks}, Review: {$reviewTasks}");
+//     // Debugging: Check if task data is retrieved
+//     \Log::info("Total Tasks: {$totalTasks}, Pending: {$pendingTasks}, Started: {$startedTasks}, Completed: {$completedTasks}, Review: {$reviewTasks}");
 
-    // Return the correct view
-    return view('auth.dashboard', compact(
-        'totalTasks', 'pendingTasks', 'startedTasks', 'completedTasks', 'reviewTasks'
-    ));
-}
+//     // Return the correct view
+//     return view('auth.dashboard', compact(
+//         'totalTasks', 'pendingTasks', 'startedTasks', 'completedTasks', 'reviewTasks'
+//     ));
+// }
 }

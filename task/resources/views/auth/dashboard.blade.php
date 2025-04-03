@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Dashboard</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -16,9 +17,15 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-        body { font-family: 'Poppins', sans-serif; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
+
 <body class="bg-gray-100 flex">
 
     <!-- Sidebar -->
@@ -28,27 +35,29 @@
         </div>
         <nav class="space-y-2">
             <!-- My Profile Button -->
-            <button id="myProfileBtn" class="flex items-center px-4 py-2 bg-blue-500 rounded-lg hover:bg-blue-700 transition">
+            <button id="myProfileBtn"
+                class="flex items-center px-4 py-2 bg-blue-500 rounded-lg hover:bg-blue-700 transition">
                 <i class="bi bi-person mr-2"></i> My Profile
             </button>
 
             <!-- My Tasks Button -->
-            <a href="#" id="myTasksBtn" data-url="{{ route('user.mytask.view') }}" 
+            <a href="#" id="myTasksBtn" data-url="{{ route('user.mytask.view') }}"
                 class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 <i class="bi bi-list-task mr-2"></i> My Tasks
             </a>
-<!-- My Score Board Button -->
+            <!-- My Score Board Button -->
 
 
-<a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}" 
-   class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-    <i class="bi bi-trophy mr-2"></i> My Score Board
-</a>
+            <a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}"
+                class="flex items-center px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <i class="bi bi-trophy mr-2"></i> My Score Board
+            </a>
 
             <!-- Logout Form -->
             <form action="{{ route('employee.logout') }}" method="POST" class="mt-6">
                 @csrf
-                <button type="submit" class="w-full flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition">
+                <button type="submit"
+                    class="w-full flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition">
                     <i class="bi bi-box-arrow-right mr-2"></i> Logout
                 </button>
             </form>
@@ -56,58 +65,23 @@
     </div>
 
     <!-- Main Content -->
- <!-- Main Content -->
- <div class="flex-1 p-10">
+    <div class="flex-1 p-10">
         <div class="bg-white shadow-lg rounded-lg p-6">
             <h2 class="text-2xl font-bold text-gray-700 text-center">
                 Welcome, {{ Auth::guard('employee')->user()->name }}!
             </h2>
             <p class="text-gray-600 text-center mt-2">Manage your tasks and performance here.</p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-                <!-- Total Tasks -->
-                <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg text-center">
-                    <h3 class="text-sm sm:text-lg font-semibold text-white">Total Tasks</h3>
-                    <p class="text-2xl sm:text-3xl font-bold text-blue-400">{{ $totalTasks ?? '0'}}</p>
-                </div>
-
-                <!-- Pending Tasks -->
-                <div class="bg-yellow-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
-                    <h3 class="text-sm sm:text-lg font-semibold text-white">Pending Tasks</h3>
-                    <p class="text-2xl sm:text-3xl font-bold">{{ $pendingTasks ?? '4' }}</p>
-                </div>
-
-                <!-- Started Tasks -->
-                <div class="bg-blue-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
-                    <h3 class="text-sm sm:text-lg font-semibold text-white">Started Tasks</h3>
-                    <p class="text-2xl sm:text-3xl font-bold">{{ $startedTasks ?? '5' }}</p>
-                </div>
-
-                <!-- Completed Tasks -->
-                <div class="bg-green-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
-                    <h3 class="text-sm sm:text-lg font-semibold text-white">Completed Tasks</h3>
-                    <p class="text-2xl sm:text-3xl font-bold">{{ $completedTasks ?? '7' }}</p>
-                </div>
-
-                <!-- Review Tasks -->
-                <div class="bg-purple-600 p-4 sm:p-6 rounded-lg shadow-lg text-center">
-                    <h3 class="text-sm sm:text-lg font-semibold text-white">Tasks in Review</h3>
-                    <p class="text-2xl sm:text-3xl font-bold">{{ $reviewTasks ?? '8' }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-        <p class="mt-2 text-gray-400 text-center text-sm sm:text-base">Manage your tasks efficiently.</p>
             <!-- Profile Container -->
             <div id="profileContainer" class="mt-4"></div>
 
             <!-- Task Container -->
             <div id="taskContainer"></div>
 
- <!-- Container where the scoreboard will be displayed -->
-<div id="scoreContainer"></div>
+            <!-- Container where the scoreboard will be displayed -->
+            <div id="scoreContainer"></div>
         </div>
     </div>
 
@@ -124,14 +98,14 @@
                     },
                     credentials: 'include'
                 })
-                .then(response => response.json())
-                .then(employee => {
-                    if (employee.error) {
-                        alert("Error: " + employee.error);
-                        return;
-                    }
+                    .then(response => response.json())
+                    .then(employee => {
+                        if (employee.error) {
+                            alert("Error: " + employee.error);
+                            return;
+                        }
 
-                    const profileHTML = `
+                        const profileHTML = `
                         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                             <div class="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white text-center">
                                 <h2 class="text-2xl font-bold">${employee.name}</h2>
@@ -147,9 +121,9 @@
                         </div>
                     `;
 
-                    $("#profileContainer").html(profileHTML);
-                })
-                .catch(error => console.error('Error fetching profile:', error));
+                        $("#profileContainer").html(profileHTML);
+                    })
+                    .catch(error => console.error('Error fetching profile:', error));
             });
 
             // Load Tasks
@@ -176,11 +150,28 @@
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.id}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_title}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.description}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.status}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_start_date}</td>
+                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">
+                                    <select class="status-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" data-task-id="${task.id}">
+                                    <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="Ongoing" ${task.status === 'Ongoing' ? 'selected' : ''}>Ongoing</option>
+                                    <option value="Completed" ${task.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                                     </select>
+                                     </td>
+                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">
+                                     <input type="date" class="start-date-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" 
+                                      value="${task.task_start_date}" data-task-id="${task.id}">
+                                    </td>
+
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.computed_deadline}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.total_days}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.remarks}</td>
+                                    <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
+                                    <button class="update-task-btn bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded" 
+                                    data-task-id="${task.id}">
+                                      Update
+                                    </button>
+                                   </td>
+
                                 </tr>
                             `;
                         });
@@ -203,6 +194,8 @@
                                             <th class="px-3 py-2 border border-gray-400">Deadline</th>
                                             <th class="px-3 py-2 border border-gray-400">Total Days</th>
                                             <th class="px-3 py-2 border border-gray-400">Remarks</th>
+                                            <th class="px-3 py-2 border border-gray-400">Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>${rows}</tbody>
@@ -217,30 +210,59 @@
             });
         }
 
+        $(document).on("click", ".update-task-btn", function () {
+    let taskId = $(this).data("task-id");
+    let newStatus = $(this).closest("tr").find(".status-update").val();
+    let newStartDate = $(this).closest("tr").find(".start-date-update").val();
+    let csrfToken = $('meta[name="csrf-token"]').attr("content"); // Get CSRF token from meta tag
 
-        // score
-        $(document).ready(function () {
-    $("#myScoreBtn").on("click", function (event) {
-        event.preventDefault();
-        LoadMyScore();
-    });
-});
-
-function LoadMyScore() {
-    let url = $("#myScoreBtn").data("url");
+    
 
     $.ajax({
-        url: url,
-        type: "GET",
-        success: function (html) {
-            $("#scoreContainer").html(html);
-        },
-        error: function () {
-            alert("Failed to load scores.");
+    url: `/tasks/update/${taskId}`,  
+    type: "PUT",
+    data: {
+        status: newStatus,
+        task_start_date: newStartDate,
+        _token: $('meta[name="csrf-token"]').attr("content")
+    },
+    success: function (response) {
+        console.log(response); // Check the response in the browser console
+        alert(response.success); // Show success message
+        LoadMyTask(); // Refresh tasks
+    },
+    error: function (xhr) {
+        console.error(xhr.responseText); // Log the actual error
+        alert("Failed to update task. Check console for details.");
+    }
+});
+});     
+        // score
+        $(document).ready(function () {
+            $("#myScoreBtn").on("click", function (event) {
+                event.preventDefault();
+                LoadMyScore();
+            });
+        });
+
+        function LoadMyScore() {
+            let url = $("#myScoreBtn").data("url");
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (html) {
+                    $("#scoreContainer").html(html);
+                },
+                error: function () {
+                    alert("Failed to load scores.");
+                }
+            });
         }
-    });
-}
+
+
     </script>
 
 </body>
+
 </html>
