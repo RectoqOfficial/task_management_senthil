@@ -25,57 +25,61 @@
         </button>
     </div>
 
+    <div class="max-w-6xl mx-auto bg-gray-800 shadow-lg rounded-lg p-6">
     <div class="overflow-x-auto">
-        <table class="w-full rounded-lg overflow-hidden shadow-md text-gray-300 border border-gray-600">
-        <thead>
-    <tr class="bg-purple-500 text-white text-left text-sm border-b border-gray-400">
-        <th class="px-3 py-2 border border-gray-400">ID</th>
-        <th class="px-3 py-2 border border-gray-400">Task Title</th>
-        <th class="px-3 py-2 border border-gray-400">Description</th>
-        <th class="px-3 py-2 border border-gray-400">Assigned To (Email)</th>
-        <th class="px-3 py-2 border border-gray-400">Status</th>
-        <th class="px-3 py-2 border border-gray-400">Start Date</th>
-        <th class="px-3 py-2 border border-gray-400">Deadline</th>
-        <th class="px-3 py-2 border border-gray-400">Total Days</th>
-        <th class="px-3 py-2 border border-gray-400">Remarks</th>
-    </tr>
-</thead>
-<tbody>
-    @foreach ($tasks as $task)
-    <tr class="bg-gray-800 border-b border-gray-500 hover:bg-gray-700 transition">
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->id }}</td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_title }}</td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->description }}</td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">
-            {{ $task->employee->name }} <br>
-            <small class="text-gray-300">{{ $task->employee->email }}</small>
-        </td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->status }}
-            <!-- <select class="status-dropdown bg-gray-800 text-white px-2 py-1 rounded" data-task-id="{{ $task->id }}">
-                <option value="Pending" {{ $task->status == 'Pending' ? 'selected' : '' }}>Pending</option>
-                <option value="In Progress" {{ $task->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
-                <option value="Completed" {{ $task->status == 'Completed' ? 'selected' : '' }}>Completed</option>
-                <option value="Review" {{ $task->status == 'Review' ? 'selected' : '' }}>Review</option>
-            </select> -->
-        </td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_start_date }}</td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->computed_deadline }}</td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->total_days }}</td>
-        <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->remarks }}</td>
-    </tr>
-    @endforeach
-</tbody>
-
+        <table class="max-w-4xl mx-auto rounded-lg overflow-hidden shadow-md text-gray-300 border border-gray-600">
+            <thead>
+                <tr class="bg-purple-500 text-white text-left text-sm border-b border-gray-400">
+                    <th class="px-3 py-2 border border-gray-400">ID</th>
+                    <th class="px-3 py-2 border border-gray-400">Task Title</th>
+                    <th class="px-3 py-2 border border-gray-400">Description</th>
+                    <th class="px-3 py-2 border border-gray-400">Assigned To (Email)</th>
+                    <th class="px-3 py-2 border border-gray-400">Status</th>
+                    <th class="px-3 py-2 border border-gray-400">Start Date</th>
+                    <th class="px-3 py-2 border border-gray-400">Deadline</th>
+                    <th class="px-3 py-2 border border-gray-400">Total Days</th>
+                    <th class="px-3 py-2 border border-gray-400">Remarks</th>
+                    <th class="px-3 py-2 border border-gray-400 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($tasks as $task)
+                <tr id="task-row-{{ $task->id }}" class="bg-gray-800 border-b border-gray-500 hover:bg-gray-700 transition">
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->id }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_title }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->description }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">
+                        {{ $task->employee->name }} <br>
+                        <small class="text-gray-300">{{ $task->employee->email }}</small>
+                    </td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->status }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_start_date }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->computed_deadline }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->total_days }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->remarks }}</td>
+                    <td class="px-3 py-2 border border-gray-400 text-center">
+                        <button class="delete-task bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 transition"
+                            data-id="{{ $task->id }}">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
+
 <!-- Modal for Creating Task -->
 <div id="taskModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity">
-    <div class="bg-gray-900 text-gray-300 p-3 rounded-lg shadow-xl w-80 h-auto transform scale-95 transition-transform">
-        <h3 class="text-sm font-bold mb-1 text-white">Create Task</h3>
+    <div class="bg-gray-900 text-white p-3 rounded-lg shadow-xl w-96 transform scale-95 transition-transform">
+        <h3 class="text-sm font-bold mb-2 text-white">Create Task</h3>
         <div id="modal-body-content">
-            <p class="text-xs">Loading...</p>
+            <p class="text-gray-300 text-xs">Loading...</p>
         </div>
-        <button id="close-modal" class="mt-1 bg-red-500 text-white px-2 py-1 text-xs rounded hover:bg-red-600 transition">Close</button>
+        <button id="close-modal" class="mt-2 bg-red-500 text-white px-2 py-1 text-xs rounded-lg hover:bg-red-600 transition">
+            Close
+        </button>
     </div>
 </div>
 
@@ -103,7 +107,33 @@
         });
     });
     
-    
+    // delete
+
+    $(document).ready(function () {
+    $(".delete-task").click(function () {
+        let taskId = $(this).data("id");
+
+        if (!confirm("Are you sure you want to delete this task?")) {
+            return;
+        }
+
+        $.ajax({
+            url: "/admin/tasks/" + taskId,  // Laravel route to delete the task
+            type: "DELETE",
+            data: {
+                _token: "{{ csrf_token() }}"  // CSRF token for security
+            },
+            success: function (response) {
+                alert("Task deleted successfully!");
+                $("#task-row-" + taskId).fadeOut(500, function () { $(this).remove(); });
+            },
+            error: function () {
+                alert("Failed to delete the task.");
+            }
+        });
+    });
+});
+
 </script>
 
 </body>

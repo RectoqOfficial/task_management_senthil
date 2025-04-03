@@ -84,7 +84,7 @@
             <input type="date" name="joining_date" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
         </div>
 
-        <button type="submit" class="w-full bg-blue-500 text-white py-1.5 rounded-lg hover:bg-blue-600 transition">
+        <button type="submit" class="w-full bg-purple-500 text-white w-full py-2 rounded hover:bg-purple-600 transition">
             Add Employee
         </button>
     </form>

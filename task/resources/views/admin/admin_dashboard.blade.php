@@ -138,7 +138,6 @@
             <div class="card text-center">
                 <h2 class="fw-bold text-primary">Welcome, Admin!</h2>
                 <p class="text-muted">Manage users, tasks, and settings from here.</p>
-                
             </div>
         </div>
     </div>

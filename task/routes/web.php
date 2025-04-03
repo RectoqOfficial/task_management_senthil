@@ -52,7 +52,7 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('admin.employee.create');
     Route::post('/employees/store', [EmployeeController::class, 'store'])->name('admin.employee.store');
     Route::get('/admin/employees/{id}', [EmployeeController::class, 'show'])->name('admin.employee.show');
-    Route::delete('/admin/employees/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.destroy');
+    Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.destroy');
     // Route::get('/employee/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
  
 
@@ -76,6 +76,7 @@ Route::get('/employee/profile', [EmployeeController::class, 'showProfile'])
         Route::get('/employee/tasks', [TaskController::class, 'getEmployeeTasks'])->name('user.mytask');
         Route::get('/employee/my-tasks', [TaskController::class, 'showEmployeeTasks'])->name('user.mytask.view');
         Route::put('/tasks/update/{id}', [TaskController::class, 'updateTask'])->name('tasks.update');
+        Route::delete('/admin/tasks/{task}', [TaskController::class, 'destroy'])->name('admin.tasks.destroy');
 
 
 

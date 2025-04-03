@@ -128,7 +128,7 @@
 
             // Load Tasks
             $("#myTasksBtn").on("click", function (event) {
-                event.preventDefault();
+                // event.preventDefault();
                 LoadMyTask();
             });
         });

@@ -48,64 +48,72 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h5 class="text-center text-primary fw-bold text-sm mb-1">Create Task</h5>
-    <form id="task-form" action="{{ route('admin.tasks.store') }}" method="POST">
+
+<!-- Task Form -->
+<div class="w-full max-w-lg bg-gray-900 text-white shadow-xl rounded-lg p-3">
+    <h2 class="text-sm font-bold mb-2 text-white text-center flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-blue-400">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a4 4 0 10-8 0v2M5 21h14a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
+        </svg>
+        Create Task
+    </h2>
+
+    <form id="task-form" action="{{ route('admin.tasks.store') }}" method="POST" class="space-y-1">
         @csrf
 
-        <div class="space-y-1 text-sm">
-            <div>
-                <label for="task_title" class="text-xs">Task Title</label>
-                <input type="text" name="task_title" class="form-control py-1 text-xs" required>
-            </div>
+        <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Task Title:</label>
+            <input type="text" name="task_title" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
+        </div>
 
-            <div>
-                <label for="description" class="text-xs">Description</label>
-                <textarea name="description" class="form-control py-1 text-xs" rows="1" required></textarea>
-            </div>
+        <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Description:</label>
+            <textarea name="description" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" rows="1" required></textarea>
+        </div>
 
-            <div>
-                <label for="employee_id" class="text-xs">Assign To</label>
-                <select name="employee_id" class="form-control py-1 text-xs" required>
-                    <option value="">Select Employee</option>
-                    @foreach ($employees as $employee)
-                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+        <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Assign To:</label>
+            <select name="employee_id" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
+                <option value="">Select Employee</option>
+                @foreach ($employees as $employee)
+                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
-            <div>
-                <label for="status" class="text-xs">Status</label>
-                <select name="status" class="form-control py-1 text-xs" required>
-                    <option value="Pending">Pending</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                </select>
-            </div>
+        <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Status:</label>
+            <select name="status" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
 
-            <div class="row">
-                <div class="col-6">
-                    <label for="deadline" class="text-xs">Deadline</label>
-                    <input type="date" name="deadline" class="form-control py-1 text-xs" required>
-                </div>
-                <div class="col-6">
-                    <label for="task_start_date" class="text-xs">Start Date</label>
-                    <input type="date" name="task_start_date" class="form-control py-1 text-xs" required>
-                </div>
-            </div>
-
+        <div class="grid grid-cols-2 gap-2">
             <div>
-                <label for="total_days" class="text-xs">Total Days</label>
-                <input type="number" name="total_days" class="form-control py-1 text-xs" required>
+                <label class="block text-xs font-medium text-gray-300 mb-1">Deadline:</label>
+                <input type="date" name="deadline" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
             </div>
-
             <div>
-                <label for="remarks" class="text-xs">Remarks</label>
-                <textarea name="remarks" class="form-control py-1 text-xs" rows="1"></textarea>
+                <label class="block text-xs font-medium text-gray-300 mb-1">Start Date:</label>
+                <input type="date" name="task_start_date" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success w-100 text-xs mt-1 py-1">Create Task</button>
+        <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Total Days:</label>
+            <input type="number" name="total_days" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
+        </div>
+
+        <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Remarks:</label>
+            <textarea name="remarks" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" rows="1"></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-purple-500 text-white w-full py-2 rounded hover:bg-purple-600 transition">
+            Create Task
+        </button>
     </form>
 </div>
 </body>
