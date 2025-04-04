@@ -109,7 +109,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table>   
             </div>
         </div>
 
@@ -130,6 +130,8 @@
 
 
         <script>
+            
+            // Model
             $(document).ready(function () {
                 $("#load-create-task").click(function (e) {
                     e.preventDefault();
@@ -151,6 +153,8 @@
                     $("#taskModal").addClass("hidden").removeClass("opacity-100 scale-100");
                 });
             });
+
+
 
             // delete
 

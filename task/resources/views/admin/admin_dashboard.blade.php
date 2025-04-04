@@ -140,6 +140,7 @@
                 <p class="text-muted">Manage users, tasks, and settings from here.</p>
             </div>
         </div>
+        
     </div>
 
     <!-- AJAX Scripts -->

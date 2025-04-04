@@ -39,13 +39,6 @@ Route::middleware(['admin.auth'])->group(function () {
 
 });
    
-
-
-// middleware is pending
-
-    
-
-
 // Admin Create Employee Details
     
     Route::get('/employees', [EmployeeController::class, 'index'])->name('admin.employee.index');
@@ -63,11 +56,6 @@ Route::get('/employee/profile-view', function () {
 Route::get('/employee/profile', [EmployeeController::class, 'showProfile'])
     ->name('employee.profile');
 
-    
-
-     
-
-
 // Admin Create Task Details
 
         Route::get('admin/tasks', [TaskController::class, 'index'])->name('admin.tasks.index');
@@ -80,17 +68,11 @@ Route::get('/employee/profile', [EmployeeController::class, 'showProfile'])
         Route::put('/tasks/update-redo/{id}', [TaskController::class, 'updateRedoCount'])->name('tasks.update.redo');
         Route::post('/tasks/update-status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
 
-
-
 // score
 
         Route::get('/scores', [ScoreController::class, 'index'])->name('score.index');
         Route::post('/scores/update/{task_id}', [ScoreController::class, 'updateScore'])->name('score.update');;
         Route::get('/my-score', [EmployeeController::class, 'showScorePage'])->name('employee.myscore.view');
-
-
-
-        // employee
 
 
 //Employee Login page

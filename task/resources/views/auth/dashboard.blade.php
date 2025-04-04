@@ -38,20 +38,23 @@
 
             <!-- My Profile Button -->
             <button id="myProfileBtn"
-                class="flex items-center gap-2 px-5 py-3 rounded-lg bg-white/10 hover:bg-purple-700 hover:text-white transition-all duration-300">
+                class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group">
                 <i class="bi bi-person text-lg"></i>
                 <span>My Profile</span>
             </button>
             <!-- My Tasks Button -->
             <a href="#" id="myTasksBtn" data-url="{{ route('user.mytask.view') }}"
-                class="flex items-center gap-2 px-5 py-3 rounded-lg bg-white/10 hover:bg-purple-700 hover:text-white transition-all duration-300">
+                class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group">
                 <i class="bi bi-list-task text-lg"></i>
                 <span>My Tasks</span>
             </a>
 
             <!-- My Score Board Button -->
             <a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}"
-                class="flex items-center gap-2 px-5 py-3 rounded-lg bg-white/10 hover:bg-purple-700 hover:text-white transition-all duration-300">
+                class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group">
                 <i class="bi bi-trophy text-lg"></i>
                 <span>My Score Board</span>
             </a>
