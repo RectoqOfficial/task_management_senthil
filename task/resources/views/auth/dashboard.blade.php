@@ -38,7 +38,7 @@
 
             <!-- My Profile Button -->
             <button id="myProfileBtn"
-                class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+                class="flex item gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
 hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group">
                 <i class="bi bi-person text-lg"></i>
                 <span>My Profile</span>
@@ -72,7 +72,10 @@ hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 eas
 
     <!-- Main Content -->
     <div class="flex-1 p-10">
-    <div class="bg-purple-300 shadow-lg rounded-lg p-6">
+
+    <!-- this is contailner  inside okey  sample using -->
+
+    <div class="bg-purple-300 shadow-lg rounded-lg p-6"> 
     <h2 class="text-2xl font-bold text-gray-700 text-center">
                 Welcome, {{ Auth::guard('employee')->user()->name }}!
             </h2>

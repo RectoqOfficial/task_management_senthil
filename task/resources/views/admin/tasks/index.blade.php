@@ -175,7 +175,6 @@
 
           
 
-
             // auto sumbit
 
             $(document).on("change", ".status-update-dropdown", function () {
@@ -203,40 +202,6 @@
     });
 });
 
-
-// redo
-
-// $(document).on("change", ".status-update-dropdown", function () {
-//     let taskId = $(this).data("task-id");
-//     let newStatus = $(this).val();
-
-//     $.ajax({
-//         url: "{{ route('tasks.updateStatus') }}",
-//         type: "POST",
-//         data: {
-//             _token: "{{ csrf_token() }}",
-//             task_id: taskId,
-//             status: newStatus
-//         },
-//         success: function (response) {
-//             if (response.success) {
-//                 alert("Status updated successfully!");
-
-//                 // Update the redo count in the UI if status is "Redo"
-//                 if (newStatus === "Redo") {
-//                     let redoCell = $("#task-row-" + taskId).find(".redo-count");
-//                     let newRedoCount = parseInt(redoCell.text()) + 1;
-//                     redoCell.text(newRedoCount);
-//                 }
-//             } else {
-//                 alert("Failed to update status.");
-//             }
-//         },
-//         error: function () {
-//             alert("Error updating status.");
-//         }
-//     });
-// });
 
 
 

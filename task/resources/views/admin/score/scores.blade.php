@@ -16,6 +16,10 @@
         body { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
+
+<!-- employee score side -->
+
+
 <body class="bg-gray-900 text-white p-6">
 <div class="mt-6">
     <h3 class="text-xl font-semibold text-gray-700">My Score Board</h3>
