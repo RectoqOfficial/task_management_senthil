@@ -6,6 +6,8 @@
     <title>Employee Scoreboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body class="bg-black text-white p-6">
     <div class="max-w-6xl mx-auto bg-gray-800 shadow-lg rounded-lg p-6">
@@ -40,14 +42,15 @@
                         <td class="border border-gray-600 p-2">{{ $employee->role->role }}</td>
                         <td class="border border-gray-600 p-2">{{ $employee->joining_date }}</td>
                         <td class="border border-gray-600 p-2">
-                            <form action="{{ route('admin.employee.destroy', $employee->id) }}" method="POST" class="inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
+    <form class="delete-employee-form" data-url="{{ route('admin.employee.destroy', $employee->id) }}">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
+            Delete
+        </button>
+    </form>
+</td>
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -119,6 +122,44 @@
                 });
             });
         });
+
+
+
+        // delete
+        $(document).on('submit', '.delete-employee-form', function (e) {
+    e.preventDefault();
+
+    var form = $(this);
+    var url = form.data('url');
+    var row = form.closest('tr');
+
+    if (confirm("Are you sure you want to delete this employee?")) {
+        $.ajax({
+            url: url,
+            type: "DELETE",
+            headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
+            success: function (response) {
+                console.log(response); // Debug success response
+                
+                if (response.success) {
+                    row.fadeOut(300, function () { $(this).remove(); });
+                } else {
+                    alert("Failed to delete employee: " + response.message);
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText); // Debugging error response
+                
+                try {
+                    var errorResponse = JSON.parse(xhr.responseText);
+                    alert("Error: " + errorResponse.message);
+                } catch (e) {
+                    alert("An unknown error occurred.");
+                }
+            }
+        });
+    }
+});
     </script>
 </body>
 </html>

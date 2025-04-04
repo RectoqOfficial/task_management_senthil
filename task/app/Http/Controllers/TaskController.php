@@ -104,7 +104,30 @@ public function updateTask(Request $request, $id)
     return response()->json(['success' => 'Task updated successfully']);
 }
 
-    
+public function updateRedoCount(Request $request, $id)
+{
+    $task = Task::findOrFail($id);
+    $task->redo_count = $request->redo_count;
+    $task->save();
+
+    return response()->json(['success' => 'Redo count updated successfully!']);
+}
+
+
+public function updateStatus(Request $request)
+{
+    $request->validate([
+        'task_id' => 'required|exists:tasks,id',
+        'status' => 'required|in:Redo,Overdue,Completed',
+    ]);
+
+    $task = Task::findOrFail($request->task_id);
+    $task->status = $request->status;
+    $task->save();
+
+    return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+}
+
 
 
 }

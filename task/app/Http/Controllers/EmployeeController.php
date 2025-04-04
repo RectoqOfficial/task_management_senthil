@@ -56,14 +56,21 @@ public function store(Request $request)
 
 
 // Employee Delete
-
 public function destroy($id)
 {
-    $employee = Employee::findOrFail($id);
-    $employee->delete();
+    $employee = Employee::find($id);
+    
+    if (!$employee) {
+        return response()->json(['success' => false, 'message' => 'Employee not found'], 404);
+    }
 
-        return redirect()->route('admin.dashboard')->with('success', 'Delete successfully');
+    if ($employee->delete()) {
+        return response()->json(['success' => true, 'message' => 'Employee deleted successfully']);
+    } else {
+        return response()->json(['success' => false, 'message' => 'Error deleting employee']);
+    }
 }
+
 
 
 

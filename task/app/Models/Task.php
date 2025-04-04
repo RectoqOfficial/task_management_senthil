@@ -10,7 +10,7 @@ class Task extends Model
     use HasFactory;
 
     
-    protected $fillable = ['task_title', 'description', 'employee_id', 'status', 'task_start_date','deadline', 'total_days', 'remarks'];
+    protected $fillable = ['task_title', 'description', 'employee_id', 'status', 'task_start_date','deadline', 'total_days','redo_count', 'remarks'];
 
     protected $appends = ['computed_deadline']; // Ensure computed attribute is included in JSON
 
