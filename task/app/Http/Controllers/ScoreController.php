@@ -52,7 +52,8 @@ class ScoreController extends Controller
             $employeeId = Auth::guard('employee')->id();
     
             $tasks = Task::where('employee_id', $employeeId)
-                        ->with('score') // Ensure the 'score' relationship exists
+                        ->with('score')
+                        ->select('id', 'task_title', 'status', 'redo_count') // Ensure the 'score' relationship exists
                         ->get();
     
             return response()->json($tasks); // Return JSON data for AJAX

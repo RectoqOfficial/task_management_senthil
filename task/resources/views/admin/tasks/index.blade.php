@@ -72,7 +72,7 @@
                                             data-task-id="{{ $task->id }}">
                                            
                                         
-                                            
+                                            <option value="Pending" {{ $task->status == 'Pending' ? 'selected' : '' }}>Pending</option> 
                                             <option value="Redo" {{ $task->status == 'Redo' ? 'selected' : '' }}>Redo</option>
                                             <option value="Overdue" {{ $task->status == 'Overdue' ? 'selected' : '' }}>Overdue
                                             </option>
@@ -80,24 +80,14 @@
                                                 Completed</option>
                                         </select>
                                     </div>
+                                    
                                 </td>
                                 <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->task_start_date }}</td>
                                 <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->computed_deadline }}
                                 </td>
+                                
                                 <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->total_days }}</td>
-                                <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
-                                    <div class="flex items-center space-x-2">
-                                        <input type="number"
-                                            class="redo-count-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded w-16 text-center"
-                                            value="{{ $task->redo_count }}" data-task-id="{{ $task->id }}">
-
-                                        <button
-                                            class="update-redo-btn bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
-                                            data-task-id="{{ $task->id }}">
-                                            <i class="bi bi-save"></i> <!-- Bootstrap save icon -->
-                                        </button>
-                                    </div>
-                                </td>
+                                <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->redo_count }}</td>
                                 <td class="px-3 py-2 border border-gray-400 text-gray-100">{{ $task->remarks }}</td>
                                 <td class="px-3 py-2 border border-gray-400 text-center">
                                     <button
@@ -183,31 +173,7 @@
                 });
             });
 
-            // redo count
-
-            $(document).on("click", ".update-redo-btn", function () {
-                let taskId = $(this).data("task-id");
-                let newRedoCount = $(this).closest("td").find(".redo-count-update").val(); // Get the updated redo_count
-                let csrfToken = $('meta[name="csrf-token"]').attr("content"); // Get CSRF token from meta tag
-
-                $.ajax({
-                    url: `/tasks/update-redo/${taskId}`, // Your route for updating redo_count
-                    type: "PUT",
-                    data: {
-                        redo_count: newRedoCount,
-                        _token: csrfToken
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        alert(response.success); // Show success message
-                        LoadMyTask(); // Refresh task list
-                    },
-                    error: function (xhr) {
-                        console.error(xhr.responseText);
-                        alert("Failed to update redo count. Check console for details.");
-                    }
-                });
-            });
+          
 
 
             // auto sumbit
@@ -236,6 +202,43 @@
         }
     });
 });
+
+
+// redo
+
+// $(document).on("change", ".status-update-dropdown", function () {
+//     let taskId = $(this).data("task-id");
+//     let newStatus = $(this).val();
+
+//     $.ajax({
+//         url: "{{ route('tasks.updateStatus') }}",
+//         type: "POST",
+//         data: {
+//             _token: "{{ csrf_token() }}",
+//             task_id: taskId,
+//             status: newStatus
+//         },
+//         success: function (response) {
+//             if (response.success) {
+//                 alert("Status updated successfully!");
+
+//                 // Update the redo count in the UI if status is "Redo"
+//                 if (newStatus === "Redo") {
+//                     let redoCell = $("#task-row-" + taskId).find(".redo-count");
+//                     let newRedoCount = parseInt(redoCell.text()) + 1;
+//                     redoCell.text(newRedoCount);
+//                 }
+//             } else {
+//                 alert("Failed to update status.");
+//             }
+//         },
+//         error: function () {
+//             alert("Error updating status.");
+//         }
+//     });
+// });
+
+
 
         </script>
 

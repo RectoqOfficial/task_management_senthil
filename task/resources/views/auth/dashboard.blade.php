@@ -94,6 +94,7 @@ hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 eas
     <!-- JavaScript for AJAX -->
     <script>
         // my profile
+
         $(document).ready(function () {
             $("#taskContainer, #scoreContainer").hide(); // Hide other sections
 
@@ -164,7 +165,8 @@ hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 eas
                     .catch(error => console.error('Error fetching profile:', error));
             });
 
-            // Load Tasks
+            // Tasks
+
             $("#myTasksBtn").on("click", function (event) {
                 $("#taskContainer").show();
                 $("#profileContainer, #scoreContainer").hide(); // Hide other sections
@@ -253,6 +255,8 @@ hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 eas
             });
         }
 
+
+
         $(document).on("click", ".update-task-btn", function () {
             let taskId = $(this).data("task-id");
             let newStatus = $(this).closest("tr").find(".status-update").val();
@@ -280,6 +284,8 @@ hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 eas
                 }
             });
         });
+
+        
         // score
         $(document).ready(function () {
             $("#myScoreBtn").on("click", function (event) {

@@ -1,6 +1,7 @@
 @ -1,222 +1 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -107,9 +108,9 @@
         .btn-custom:hover {
             transform: scale(1.05);
         }
-
     </style>
 </head>
+
 <body>
 
     <!-- Sidebar -->
@@ -123,8 +124,8 @@
         <a href="#" id="load-scoreboard"><i class="bi bi-trophy"></i> Score Board</a>
         <a href="javascript:void(0);" id="load-roles"><i class="bi bi-person-badge"></i> Role Details</a>
 
-        <a href="{{ route('admin.logout') }}" class="text-danger" 
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <a href="{{ route('admin.logout') }}" class="text-danger"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="bi bi-box-arrow-right"></i> Logout
         </a>
         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
@@ -140,11 +141,13 @@
                 <p class="text-muted">Manage users, tasks, and settings from here.</p>
             </div>
         </div>
-        
+
     </div>
 
     <!-- AJAX Scripts -->
     <script>
+
+        // Employee
         $(document).ready(function () {
             // Load Employee List
             $("#load-employees").click(function (e) {
@@ -193,21 +196,22 @@
         });
 
         // Load Score Board
-$("#load-scoreboard").click(function (e) {
-    e.preventDefault();
-    $.ajax({
-        url: "{{ route('score.index') }}",
-        type: "GET",
-        success: function (response) {
-            $("#dynamic-content").html(response);
-        },
-        error: function () {
-            alert("Failed to load Score Board.");
-        }
-    });
-});
+        $("#load-scoreboard").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('score.index') }}",
+                type: "GET",
+                success: function (response) {
+                    $("#dynamic-content").html(response);
+                },
+                error: function () {
+                    alert("Failed to load Score Board.");
+                }
+            });
+        });
 
     </script>
 
 </body>
+
 </html>

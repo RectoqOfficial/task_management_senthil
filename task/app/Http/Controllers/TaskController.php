@@ -35,7 +35,7 @@ class TaskController extends Controller
             'task_title' => 'required|string|max:255',
             'description' => 'required',
             'employee_id' => 'required|exists:employees,id',
-            'status' => 'required|in:Pending,Ongoing,Completed',
+            'status' => 'required|in:Pending, Ongoing, Completed, Started, Review, Redo, Overdue',
             'deadline' => 'nullable|date',
             'task_start_date' => 'nullable|date',
             'total_days' => 'nullable|integer',
@@ -81,6 +81,7 @@ class TaskController extends Controller
 
 
 
+
 public function updateTask(Request $request, $id)
 {
     $task = Task::find($id);
@@ -104,24 +105,22 @@ public function updateTask(Request $request, $id)
     return response()->json(['success' => 'Task updated successfully']);
 }
 
-public function updateRedoCount(Request $request, $id)
-{
-    $task = Task::findOrFail($id);
-    $task->redo_count = $request->redo_count;
-    $task->save();
 
-    return response()->json(['success' => 'Redo count updated successfully!']);
-}
 
 
 public function updateStatus(Request $request)
 {
     $request->validate([
         'task_id' => 'required|exists:tasks,id',
-        'status' => 'required|in:Redo,Overdue,Completed',
+        'status' => 'required|in:Pending,Started,Review,Redo,Overdue,Completed',
     ]);
 
     $task = Task::findOrFail($request->task_id);
+
+    if ($request->status === "Redo") {
+        $task->redo_count += 1;
+    }
+
     $task->status = $request->status;
     $task->save();
 
