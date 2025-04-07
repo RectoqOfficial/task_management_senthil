@@ -83,25 +83,6 @@
             </select>
         </div>
 
-        <div>
-            <label class="block text-xs font-medium text-gray-300 mb-1">Status:</label>
-            <select name="status" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-            </select>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Deadline:</label>
-                <input type="date" name="deadline" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
-            </div>
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Start Date:</label>
-                <input type="date" name="task_start_date" class="w-full border border-gray-500 rounded-lg p-1 bg-gray-700 text-white focus:ring focus:ring-blue-400" required>
-            </div>
-        </div>
 
         <div>
             <label class="block text-xs font-medium text-gray-300 mb-1">Total Days:</label>
@@ -116,8 +97,76 @@
         <button type="submit" class="w-full bg-purple-500 text-white w-full py-2 rounded hover:bg-purple-600 transition">
             Create Task
         </button>
+
+
     </form>
+<!-- ADD SUCCESS MESSAGE HERE -->
+<div id="task-success" class="hidden bg-green-600 text-white text-sm rounded p-2 my-2 text-center">
+    Task created successfully!
 </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#task-form').on('submit', function (e) {
+            e.preventDefault(); // 🚫 Prevent page reload
+
+            let form = $(this);
+            let formData = form.serialize();
+            let actionUrl = form.attr('action');
+
+            $.ajax({
+                url: actionUrl,
+                method: 'POST',
+                data: formData,
+                success: function (response) {
+                    // ✅ Show success message
+                    $('#task-success').removeClass('hidden').text('Task created successfully!');
+
+                    // ✅ Reset form fields
+                    $('#task-form')[0].reset();
+
+                    // ✅ Optional: Auto-hide message after 3 seconds
+                    setTimeout(function () {
+                        $('#task-success').addClass('hidden');
+                    }, 3000);
+
+                    // ✅ Add new task to the top of task list dynamically
+                    $('#task-list tbody').prepend(`
+                        <tr class="bg-gray-800 border-b border-gray-500 hover:bg-gray-700 transition">
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.id}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.task_title}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.description}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">
+                                ${response.task.employee_name}<br>
+                                <small>${response.task.employee_email}</small>
+                            </td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.status}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.task_start_date}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.deadline}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.total_days}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.redo_count ?? 0}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-gray-100">${response.task.remarks ?? ''}</td>
+                            <td class="px-3 py-2 border border-gray-400 text-center">
+                                <button class="delete-task bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 transition" data-id="${response.task.id}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                },
+                error: function (xhr) {
+                    alert('Task creation failed.');
+                }
+            });
+        });
+    });
+</script>
+
+
+
 </body>
 </html>
 

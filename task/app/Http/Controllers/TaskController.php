@@ -29,23 +29,42 @@ class TaskController extends Controller
     }
 
 //Task Store Database  
-    public function store(Request $request)
-    {
-        $request->validate([
-            'task_title' => 'required|string|max:255',
-            'description' => 'required',
-            'employee_id' => 'required|exists:employees,id',
-            'status' => 'required|in:Pending, Ongoing, Completed, Started, Review, Redo, Overdue',
-            'deadline' => 'nullable|date',
-            'task_start_date' => 'nullable|date',
-            'total_days' => 'nullable|integer',
-            'remarks' => 'nullable|string',
+public function store(Request $request)
+{
+    $request->validate([
+        'task_title' => 'required|string|max:255',
+        'description' => 'required',
+        'employee_id' => 'required|exists:employees,id',
+        'total_days' => 'required|integer|min:1', // Validate it’s a number
+        'remarks' => 'nullable|string',
+    ]);
+
+    $totalDays = (int) $request->total_days; // ✅ Fix: cast to integer
+
+    $task = new Task();
+    $task->task_title = $request->task_title;
+    $task->description = $request->description;
+    $task->employee_id = $request->employee_id;
+    $task->remarks = $request->remarks;
+
+    $task->status = 'Pending';
+    $task->task_start_date = now();
+    $task->deadline = now()->addDays($totalDays); // ✅ Safe now
+    $task->total_days = $totalDays;
+
+    $task->save();
+
+       // If AJAX, return JSON
+       if ($request->ajax()) {
+        return response()->json([
+            'message' => 'Task created successfully',
+            'task_title' => $task->task_title,
+            'task_id' => $task->id
         ]);
-
-        Task::create($request->all());
-
-        return redirect()->route('admin.dashboard')->with('success', 'Task added successfully');
     }
+    return redirect()->route('admin.dashboard')->with('success', 'Task added successfully');
+}
+
     
     // delete task
     public function destroy($id)
