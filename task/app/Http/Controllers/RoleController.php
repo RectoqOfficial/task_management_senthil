@@ -28,12 +28,17 @@ class RoleController extends Controller
             'department' => 'required|string|max:255',
         ]);
 
-        Role::create([
+        $role = Role::create([
             'role' => $request->role,
             'department' => $request->department,
         ]);
-
-        return redirect()->route('admin.dashboard')->with('success', 'Role added successfully');
+    
+            // Return JSON for AJAX
+    return response()->json([
+        'success' => true,
+        'message' => 'Role created successfully!',
+        'role' => $role,
+    ]);
     }
 
     // Delete role

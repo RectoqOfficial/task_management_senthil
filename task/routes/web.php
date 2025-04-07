@@ -67,6 +67,7 @@ Route::get('/employee/profile', [EmployeeController::class, 'showProfile'])
         Route::delete('/admin/tasks/{task}', [TaskController::class, 'destroy'])->name('admin.tasks.destroy');
         Route::put('/tasks/update-redo/{id}', [TaskController::class, 'updateRedoCount'])->name('tasks.update.redo');
         Route::post('/tasks/update-status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+        Route::put('/tasks/update-date/{id}', [TaskController::class, 'updateStartDate']);
 
 // score
 

@@ -28,89 +28,86 @@
 
 <body class="bg-green-100 flex">
 
-   <!-- Toggle Button (Mobile Only) -->
-   <div class="lg:hidden fixed top-4 left-4 z-50">
-    <button id="menuToggle" class="text-white bg-purple-700 p-2 rounded-md shadow-md">
-        <i class="bi bi-list text-2xl"></i>
-    </button>
-</div>
-
-
-<!-- Responsive Sidebar -->
-<div id="sidebar"
-    class="fixed top-0 left-0 w-64 min-h-screen lg:h-screen bg-gradient-to-b from-purple-800 to-purple-900 text-white p-5 shadow-lg z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:transform-none">
-    
-    <div class="text-center mb-6">
-        <h2 class="text-lg font-semibold">Employee Dashboard</h2>
+    <!-- Toggle Button (Mobile Only) -->
+    <div class="lg:hidden fixed top-4 left-4 z-50">
+        <button id="menuToggle" class="text-white bg-purple-700 p-2 rounded-md shadow-md">
+            <i class="bi bi-list text-2xl"></i>
+        </button>
     </div>
 
-    <nav class="space-y-2">
-        <!-- My Profile Button -->
-        <button id="myProfileBtn"
-            class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
-        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
-            <i class="bi bi-person text-lg"></i>
-            <span>My Profile</span>
-        </button>
 
-        <!-- My Tasks Button -->
-        <a href="#" id="myTasksBtn" data-url="{{ route('user.mytask.view') }}"
-            class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
-        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
-            <i class="bi bi-list-task text-lg"></i>
-            <span>My Tasks</span>
-        </a>
+    <!-- Responsive Sidebar -->
+    <div id="sidebar"
+        class="fixed top-0 left-0 w-64 min-h-screen lg:h-screen bg-gradient-to-b from-purple-800 to-purple-900 text-white p-5 shadow-lg z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:transform-none">
 
-        <!-- My Score Board Button -->
-        <a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}"
-            class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
-        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
-            <i class="bi bi-trophy text-lg"></i>
-            <span>My Score Board</span>
-        </a>
+        <div class="text-center mb-6">
+            <h2 class="text-lg font-semibold">Employee Dashboard</h2>
+        </div>
 
-        <!-- Logout -->
-        <form action="{{ route('employee.logout') }}" method="POST" class="pt-6">
-            @csrf
-            <button type="submit"
-                class="w-full flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition">
-                <i class="bi bi-box-arrow-right mr-2"></i> Logout
+        <nav class="space-y-2">
+            <!-- My Profile Button -->
+            <button id="myProfileBtn" class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
+                <i class="bi bi-person text-lg"></i>
+                <span>My Profile</span>
             </button>
-        </form>
-    </nav>
-</div>
-<!-- nice -->
 
-<!-- Overlay for Mobile -->
-<div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+            <!-- My Tasks Button -->
+            <a href="#" id="myTasksBtn" data-url="{{ route('user.mytask.view') }}" class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
+                <i class="bi bi-list-task text-lg"></i>
+                <span>My Tasks</span>
+            </a>
 
-<!-- JS for Sidebar Toggle -->
-<script>
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
+            <!-- My Score Board Button -->
+            <a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}" class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
+                <i class="bi bi-trophy text-lg"></i>
+                <span>My Score Board</span>
+            </a>
 
-    menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('-translate-x-full');
-        overlay.classList.toggle('hidden');
-    });
+            <!-- Logout -->
+            <form action="{{ route('employee.logout') }}" method="POST" class="pt-6">
+                @csrf
+                <button type="submit"
+                    class="w-full flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition">
+                    <i class="bi bi-box-arrow-right mr-2"></i> Logout
+                </button>
+            </form>
+        </nav>
+    </div>
+    <!-- nice -->
 
-    overlay.addEventListener('click', () => {
-        sidebar.classList.add('-translate-x-full');
-        overlay.classList.add('hidden');
-    });
-</script>
+    <!-- Overlay for Mobile -->
+    <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+    <!-- JS for Sidebar Toggle -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+    </script>
 
 
-<!-- sider six responceve nice ---->
+    <!-- sider six responceve nice ---->
 
     <!-- Main Content -->
     <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
 
-    <!-- this is contailner  inside okey  sample using -->
+        <!-- this is contailner  inside okey  sample using -->
 
-    <div class="bg-purple-300 shadow-lg rounded-lg p-6"> 
-    <h2 class="text-2xl font-bold text-gray-700 text-center">
+        <div class="bg-purple-300 shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-700 text-center">
                 Welcome, {{ Auth::guard('employee')->user()->name }}!
             </h2>
             <p class="text-gray-600 text-center mt-2">Manage your tasks and performance here.</p>
@@ -230,13 +227,18 @@
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.id}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_title}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.description}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100">
-                                    <select class="status-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" data-task-id="${task.id}">
-                                    <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
-                                    <option value="Started" ${task.status === 'Started' ? 'selected' : ''}>Started</option>
-                                    <option value="Review" ${task.status === 'Review' ? 'selected' : ''}>Review</option
-                                     </select>
-                                     </td>
+                                   <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
+    <!-- Show current status -->
+    <span class="text-sm font-semibold text-white mb-1 block">${task.status}</span>
+
+    <!-- Status update dropdown -->
+    <select class="status-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" data-task-id="${task.id}">
+        <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
+        <option value="Started" ${task.status === 'Started' ? 'selected' : ''}>Started</option>
+        <option value="Review" ${task.status === 'Review' ? 'selected' : ''}>Review</option>
+    </select>
+</td>
+
                                      <td class="px-3 py-2 border border-gray-400 text-gray-100">
                                      <input type="date" class="start-date-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" 
                                       value="${task.task_start_date}" data-task-id="${task.id}">
@@ -292,37 +294,38 @@
             });
         }
 
+        // date auto upadte
+        $(document).on("blur", ".start-date-update", function () {
+            const $input = $(this);
+            const taskId = $input.data("task-id");
+            const newDate = $input.val();
 
+            // Check if date is in full correct format (YYYY-MM-DD)
+            const isValidFullDate = /^\d{4}-\d{2}-\d{2}$/.test(newDate);
 
-        $(document).on("click", ".update-task-btn", function () {
-            let taskId = $(this).data("task-id");
-            let newStatus = $(this).closest("tr").find(".status-update").val();
-            let newStartDate = $(this).closest("tr").find(".start-date-update").val();
-            let csrfToken = $('meta[name="csrf-token"]').attr("content"); // Get CSRF token from meta tag
-
-
-
-            $.ajax({
-                url: `/tasks/update/${taskId}`,
-                type: "PUT",
-                data: {
-                    status: newStatus,
-                    task_start_date: newStartDate,
-                    _token: $('meta[name="csrf-token"]').attr("content")
-                },
-                success: function (response) {
-                    console.log(response); // Check the response in the browser console
-                    alert(response.success); // Show success message
-                    LoadMyTask(); // Refresh tasks
-                },
-                error: function (xhr) {
-                    console.error(xhr.responseText); // Log the actual error
-                    alert("Failed to update task. Check console for details.");
-                }
-            });
+            if (isValidFullDate) {
+                $.ajax({
+                    url: `/tasks/update-date/${taskId}`,
+                    type: "PUT",
+                    data: {
+                        task_start_date: newDate,
+                        _token: $('meta[name="csrf-token"]').attr("content")
+                    },
+                    success: function (response) {
+                        console.log("Start date updated:", response);
+                        LoadMyTask(); // Refresh UI if needed
+                    },
+                    error: function (xhr) {
+                        console.error("Update error:", xhr.responseText);
+                        alert("Failed to update start date.");
+                    }
+                });
+            } else {
+                console.log("Skipped update — not a complete date.");
+            }
         });
 
-        
+
         // score
         $(document).ready(function () {
             $("#myScoreBtn").on("click", function (event) {
@@ -349,6 +352,36 @@
                 }
             });
         }
+
+
+        // Auto update on status change employee
+
+        $(document).ready(function () {
+            // Auto update on status change
+            $(document).on('change', '.status-update', function () {
+                const taskId = $(this).data('task-id');
+                const newStatus = $(this).val();
+
+                $.ajax({
+                    url: '/tasks/update-status', // Adjust to your actual route
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        task_id: taskId,
+                        status: newStatus
+                    },
+                    success: function (response) {
+                        alert('Status updated successfully!');
+                        // Optionally refresh or update parts of the DOM
+                    },
+                    error: function () {
+                        alert('Failed to update status.');
+                    }
+                });
+            });
+        });
+
+
 
 
     </script>

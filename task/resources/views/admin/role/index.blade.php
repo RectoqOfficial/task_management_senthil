@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body class="bg-black text-white p-6">
@@ -42,22 +44,24 @@
                         <th class="border border-gray-600 p-2">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($roles as $role)
-                        <tr class="bg-gray-900 hover:bg-gray-700">
-                            <td class="border border-gray-600 p-2">{{ $role->id }}</td>
-                            <td class="border border-gray-600 p-2">{{ $role->role }}</td>
-                            <td class="border border-gray-600 p-2">{{ $role->department }}</td>
-                            <td class="border border-gray-600 p-2">
-                                <button
-                                    class="delete-role bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-                                    data-id="{{ $role->id }}">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
+                <tbody id="role-list">
+    @foreach($roles as $role)
+        <tr class="bg-gray-900 hover:bg-gray-700">
+            <td class="border border-gray-600 p-2">{{ $role->id }}</td>
+            <td class="border border-gray-600 p-2">{{ $role->role }}</td>
+            <td class="border border-gray-600 p-2">{{ $role->department }}</td>
+            <td class="border border-gray-600 p-2">
+                <button
+                    class="delete-role bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                    data-id="{{ $role->id }}">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
+
+
             </table>
         </div>
     </div>
@@ -66,7 +70,7 @@
     <div id="createRoleModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-xl w-96">
             <h3 class="text-lg font-bold mb-4 text-white">Create Role</h3>
-            <form action="{{ route('admin.roles.store') }}" method="POST">
+            <form id="create-role-form" action="{{ route('admin.roles.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="role" class="block text-sm font-medium">Role Name</label>
@@ -96,29 +100,72 @@
             document.getElementById('createRoleModal').classList.add('hidden');
         });
 
-        $(document).ready(function () {
-        let csrfToken = $('meta[name="csrf-token"]').attr("content");
+       
 
-        // Delete Role AJAX
-        $(document).on("click", ".delete-role", function () {
-            let roleId = $(this).data("id");
+// dynamcly show create role
+        $('#create-role-form').on('submit', function (e) {
+        e.preventDefault();
 
-            if (!confirm("Are you sure you want to delete this role?")) return;
+        const form = $(this);
+        const data = form.serialize();
 
-            $.ajax({
-                url: "/admin/roles/" + roleId,  // Update this route if needed
-                type: "DELETE",
-                data: { _token: csrfToken },
-                success: function () {
-                    $("#role-row-" + roleId).fadeOut(500, function () { $(this).remove(); });
-                },
-                error: function () {
-                    alert("Failed to delete role.");
+        $.ajax({
+            url: form.attr('action'),
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                if (response.success) {
+                    // Append full row with ID, Role, Department, Delete
+                    $('#role-list').append(`
+                        <tr class="bg-gray-900 hover:bg-gray-700" id="role-row-${response.role.id}">
+                            <td class="border border-gray-600 p-2">${response.role.id}</td>
+                            <td class="border border-gray-600 p-2">${response.role.role}</td>
+                            <td class="border border-gray-600 p-2">${response.role.department}</td>
+                            <td class="border border-gray-600 p-2">
+                                <button
+                                    class="delete-role bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                                    data-id="${response.role.id}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+
+                    // Clear form and close modal
+                    form[0].reset();
+                    $('#createRoleModal').addClass('hidden');
+                    alert(response.message);
                 }
-            });
+            },
+            error: function (xhr) {
+                alert('Error creating role');
+                console.error(xhr.responseText);
+            }
         });
     });
 
+    // delete
+    // Delete handler for both existing and new roles
+    $(document).on('click', '.delete-role', function () {
+        const roleId = $(this).data('id');
+
+        if (confirm('Are you sure you want to delete this role?')) {
+            $.ajax({
+                url: `/admin/roles/${roleId}`,
+                type: 'DELETE',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function () {
+                    $(`#role-row-${roleId}`).remove();
+                    alert('Role deleted successfully');
+                },
+                error: function () {
+                    alert('Error deleting role');
+                }
+            });
+        }
+    });
     </script>
 </body>
 

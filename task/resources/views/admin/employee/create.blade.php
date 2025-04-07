@@ -24,7 +24,7 @@
         Add Employee
     </h2>
 
-    <form action="/employees/store" method="POST" class="space-y-2">
+    <form id="employeeForm" action="/employees/store" method="POST" class="space-y-2">
         @csrf
 
         <div class="grid grid-cols-2 gap-3">
@@ -102,6 +102,44 @@
             }
         @endforeach
     });
+
+
+
+
+$(document).ready(function () {
+    $('#employeeForm').on('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        $.ajax({
+            url: '/employees/store',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function (response) {
+                // Show success message
+                alert('Employee created successfully!');
+
+                // Add new employee row dynamically
+                $('#employeeTableBody').append(`
+                    <tr class="bg-gray-800 hover:bg-gray-700">
+                        <td class="p-2 border border-gray-600">${response.id}</td>
+                        <td class="p-2 border border-gray-600">${response.name}</td>
+                        <td class="p-2 border border-gray-600">${response.email}</td>
+                        <td class="p-2 border border-gray-600">${response.department}</td>
+                        <td class="p-2 border border-gray-600">${response.role}</td>
+                        <td class="p-2 border border-gray-600">${response.joining_date}</td>
+                    </tr>
+                `);
+
+                $('#employeeForm')[0].reset(); // Reset the form
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('Error: Unable to add employee.');
+            }
+        });
+    });
+});
+
 </script>   
 
 </body>

@@ -29,29 +29,43 @@ class EmployeeController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'name' => 'required',
-        'email' => 'required|email|unique:employees',
-        'password' => 'required',
-        'contact' => 'required',
-        'gender' => 'required',
-        'department' => 'required',
-        'role_id' => 'required|exists:roles,id',
-        'joining_date' => 'required|date'
+        'name'         => 'required',
+        'email'        => 'required|email|unique:employees,email',
+        'password'     => 'required',
+        'contact'      => 'required',
+        'gender'       => 'required',
+        'department'   => 'required',
+        'role_id'      => 'required|exists:roles,id',
+        'joining_date' => 'required|date',
     ]);
 
-    Employee::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'contact' => $request->contact,
-        'gender' => $request->gender,
-        'department' => $request->department,
-        'role_id' => $request->role_id,
+    // Create the employee
+    $employee = Employee::create([
+        'name'         => $request->name,
+        'email'        => $request->email,
+        'password'     => bcrypt($request->password),
+        'contact'      => $request->contact,
+        'gender'       => $request->gender,
+        'department'   => $request->department,
+        'role_id'      => $request->role_id,
         'joining_date' => $request->joining_date,
     ]);
 
-    return redirect()->route('admin.dashboard')->with('success', 'Employee added successfully');
+    // Load the role relation so we can access $employee->role->role
+    $employee->load('role');
 
+    return response()->json([
+        'message' => 'Employee added successfully',
+        'employee' => [
+            'id'           => $employee->id,
+            'name'         => $employee->name,
+            'email'        => $employee->email,
+            'contact'      => $employee->contact,
+            'department'   => $employee->department,
+            'role'         => $employee->role->role,
+            'joining_date' => $employee->joining_date,
+        ]
+    ]);
 }
 
 

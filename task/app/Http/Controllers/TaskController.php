@@ -7,7 +7,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -130,6 +130,23 @@ public function updateStatus(Request $request)
     return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
 }
 
+public function updateStartDate(Request $request, $id)
+{
+    $task = Task::findOrFail($id);
+
+    if ($request->has('task_start_date')) {
+        $task->task_start_date = $request->task_start_date;
+
+        // Recalculate deadline if total_days exists
+        if ($task->total_days) {
+            $task->deadline = Carbon::parse($task->task_start_date)->addDays($task->total_days);
+        }
+
+        $task->save();
+    }
+
+    return response()->json(['success' => 'Start date updated successfully.']);
+}
 
 
 }
