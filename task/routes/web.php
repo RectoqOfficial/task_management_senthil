@@ -72,7 +72,7 @@ Route::get('/employee/profile', [EmployeeController::class, 'showProfile'])
 
         Route::get('/scores', [ScoreController::class, 'index'])->name('score.index');
         Route::post('/scores/update/{task_id}', [ScoreController::class, 'updateScore'])->name('score.update');;
-        Route::get('/my-score', [EmployeeController::class, 'showScorePage'])->name('employee.myscore.view');
+        Route::get('/my-score', [ScoreController::class, 'showScorePage'])->name('employee.myscore.view');
 
 
 //Employee Login page

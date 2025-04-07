@@ -35,6 +35,32 @@ public function getComputedDeadlineAttribute()
     }
     return null; // If values are missing, return null
 }
+public function updateScore()
+{
+    // Find or create the related score record
+    $score = \App\Models\Score::firstOrNew(['task_id' => $this->id]);
+
+    // Use the task's own redo_count to calculate the score
+    $redoCount = $this->redo_count ?? 0;
+
+    // Simple formula: 100 - (10 * redo_count)
+    $score->score = max(100 - ($redoCount * 10), 0);
+
+    // Save the score
+    $score->save();
+}
+
+
+protected static function booted()
+{
+    static::updated(function ($task) {
+        if ($task->isDirty('redo_count')) {
+            $task->updateScore();
+        }
+    });
+}
+
+
 
     
 }

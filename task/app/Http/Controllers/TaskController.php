@@ -47,6 +47,7 @@ class TaskController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Task added successfully');
     }
     
+    // delete task
     public function destroy($id)
 {
     $task = Task::findOrFail($id);
@@ -56,7 +57,7 @@ class TaskController extends Controller
 }
 
     
-    
+    // Employee show Task
     public function showEmployeeTasks(Request $request)
 {
     if (!Auth::guard('employee')->check()) {
@@ -81,7 +82,7 @@ class TaskController extends Controller
 
 
 
-
+// task date employee start
 public function updateTask(Request $request, $id)
 {
     $task = Task::find($id);
@@ -92,6 +93,8 @@ public function updateTask(Request $request, $id)
 
     $task->status = $request->status;
     $task->task_start_date = $request->task_start_date;
+    
+    
 
     // Automatically calculate deadline based on total_days if needed
     
@@ -106,8 +109,8 @@ public function updateTask(Request $request, $id)
 }
 
 
-
-
+ 
+// Admin Redo count click employee show
 public function updateStatus(Request $request)
 {
     $request->validate([

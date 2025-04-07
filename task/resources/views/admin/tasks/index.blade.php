@@ -31,7 +31,7 @@
             </button>
         </div>
 
-        <div class="max-w-6xl mx-auto bg-gray-800 shadow-lg rounded-lg p-6">
+        <div class="max-w-6xl mx-auto</div> bg-gray-800 shadow-lg rounded-lg p-6">
             <div class="overflow-x-auto">
                 <table
                     class="max-w-4xl mx-auto rounded-lg overflow-hidden shadow-md text-gray-300 border border-gray-600">

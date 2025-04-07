@@ -28,50 +28,84 @@
 
 <body class="bg-green-100 flex">
 
-    <!-- Sidebar -->
-    <div class="w-64 min-h-screen bg-gradient-to-b from-purple-800 to-purple-900 text-white p-5 shadow-lg">
-        <div class="text-center mb-6">
+   <!-- Toggle Button (Mobile Only) -->
+   <div class="lg:hidden fixed top-4 left-4 z-50">
+    <button id="menuToggle" class="text-white bg-purple-700 p-2 rounded-md shadow-md">
+        <i class="bi bi-list text-2xl"></i>
+    </button>
+</div>
 
-            <h2 class="text-lg font-semibold">Employee Dashboard</h2>
-        </div>
-        <nav class="space-y-2">
 
-            <!-- My Profile Button -->
-            <button id="myProfileBtn"
-                class="flex item gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
-hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group">
-                <i class="bi bi-person text-lg"></i>
-                <span>My Profile</span>
-            </button>
-            <!-- My Tasks Button -->
-            <a href="#" id="myTasksBtn" data-url="{{ route('user.mytask.view') }}"
-                class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
-hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group">
-                <i class="bi bi-list-task text-lg"></i>
-                <span>My Tasks</span>
-            </a>
-
-            <!-- My Score Board Button -->
-            <a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}"
-                class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
-hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group">
-                <i class="bi bi-trophy text-lg"></i>
-                <span>My Score Board</span>
-            </a>
-
-            <!-- Logout Form -->
-            <form action="{{ route('employee.logout') }}" method="POST" class="mt-6">
-                @csrf
-                <button type="submit"
-                    class="w-full flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition">
-                    <i class="bi bi-box-arrow-right mr-2"></i> Logout
-                </button>
-            </form>
-        </nav>
+<!-- Responsive Sidebar -->
+<div id="sidebar"
+    class="fixed top-0 left-0 w-64 min-h-screen lg:h-screen bg-gradient-to-b from-purple-800 to-purple-900 text-white p-5 shadow-lg z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:transform-none">
+    
+    <div class="text-center mb-6">
+        <h2 class="text-lg font-semibold">Employee Dashboard</h2>
     </div>
 
+    <nav class="space-y-2">
+        <!-- My Profile Button -->
+        <button id="myProfileBtn"
+            class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
+            <i class="bi bi-person text-lg"></i>
+            <span>My Profile</span>
+        </button>
+
+        <!-- My Tasks Button -->
+        <a href="#" id="myTasksBtn" data-url="{{ route('user.mytask.view') }}"
+            class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
+            <i class="bi bi-list-task text-lg"></i>
+            <span>My Tasks</span>
+        </a>
+
+        <!-- My Score Board Button -->
+        <a href="#" id="myScoreBtn" data-url="{{ route('employee.myscore.view') }}"
+            class="flex items-center gap-3 px-6 py-3 rounded-lg bg-white/1 hover:bg-gradient-to-r hover:from-purple-700 hover:to-purple-500 
+        hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out group w-full">
+            <i class="bi bi-trophy text-lg"></i>
+            <span>My Score Board</span>
+        </a>
+
+        <!-- Logout -->
+        <form action="{{ route('employee.logout') }}" method="POST" class="pt-6">
+            @csrf
+            <button type="submit"
+                class="w-full flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition">
+                <i class="bi bi-box-arrow-right mr-2"></i> Logout
+            </button>
+        </form>
+    </nav>
+</div>
+<!-- nice -->
+
+<!-- Overlay for Mobile -->
+<div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+<!-- JS for Sidebar Toggle -->
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+    });
+</script>
+
+
+<!-- sider six responceve nice ---->
+
     <!-- Main Content -->
-    <div class="flex-1 p-10">
+    <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
 
     <!-- this is contailner  inside okey  sample using -->
 

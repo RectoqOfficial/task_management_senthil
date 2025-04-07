@@ -9,16 +9,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
-<body class="bg-black text-white p-6">
-    <div class="max-w-6xl mx-auto bg-gray-800 shadow-lg rounded-lg p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-semibold text-white">Employee Details</h2>
-            <button id="open-create-modal" class="bg-purple-500 text-white px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-purple-600 transition">
-                Create Employee
-            </button>
-        </div>
-        <div class="overflow-x-auto">
-            <table class="w-full border border-gray-600 text-white text-center">
+<body class="bg-black text-white p-4 sm:p-6">
+<div class="max-w-6xl mx-auto bg-gray-800 shadow-lg rounded-lg p-6">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-white">Employee Details</h2>
+        <button id="open-create-modal" class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm sm:text-base flex items-center gap-1 hover:bg-purple-600 transition">
+            Create Employee
+        </button>
+    </div>
+<!-- nice -->
+    <div class="overflow-x-auto w-full">
+    <table class="min-w-[600px] w-full border border-gray-600 text-white text-sm sm:text-base text-center">
+
                 <thead>
                     <tr class="bg-purple-600 text-white text-sm">
                         <th class="border border-gray-600 p-2">ID</th>
@@ -59,8 +61,9 @@
     </div>
 
 <!-- Modal for Creating Employee -->
-<div id="createEmployeeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-gray-800 text-gray-100 p-3 rounded-lg shadow-xl w-96 flex flex-col items-center">
+<div id="createEmployeeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div class="bg-gray-800 text-gray-100 p-4 sm:p-6 rounded-lg shadow-xl w-full max-w-md mx-auto">
+
         <h3 class="text-lg font-bold mb-2 text-white">Add Employee</h3>
         <div id="modal-content">
             <p class="text-gray-200">Loading...</p>

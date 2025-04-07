@@ -1,4 +1,3 @@
-@ -1,222 +1 @@
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,16 +18,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        /* 🎨 4-Color Gradient Background */
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #ff7eb3, #6a11cb, #2575fc, #00c9a7);
             min-height: 100vh;
             margin: 0;
-            display: flex;
         }
 
-        /* 🚀 Sidebar - Glassmorphism & Smooth Hover Effects */
         .sidebar {
             width: 260px;
             height: 100vh;
@@ -42,9 +38,9 @@
             box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
             overflow-y: auto;
             transition: 0.3s;
+            z-index: 1000;
         }
 
-        /* Sidebar Links */
         .sidebar a {
             color: white;
             padding: 12px 20px;
@@ -63,32 +59,27 @@
             border-radius: 5px;
         }
 
-        /* Active Page Highlight */
         .sidebar a.active {
             background: rgba(255, 255, 255, 0.3);
             border-left: 5px solid #00c9a7;
             font-weight: bold;
         }
 
-        /* Profile Section */
         .sidebar .profile {
             text-align: center;
             padding: 20px;
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* 🌟 Content Styling */
         .content {
-            margin-left: 140px;
+            margin-left: 260px;
             padding: 20px;
-            width: calc(100% - 140px);
+            background: rgba(255, 255, 255, 0.95);
             min-height: 100vh;
-            background: rgba(255, 255, 255, 0.9);
-            overflow-y: auto;
-            border-radius: 15px;
+            border-radius: 15px 0 0 15px;
+            transition: 0.3s;
         }
 
-        /* 🏆 Dashboard Card */
         .card {
             background: linear-gradient(135deg, #ffffff, #f8f9fa);
             padding: 20px;
@@ -96,7 +87,6 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* 🎯 Buttons */
         .btn-custom {
             padding: 10px 15px;
             font-size: 14px;
@@ -108,13 +98,50 @@
         .btn-custom:hover {
             transform: scale(1.05);
         }
+
+        /* 🧠 Responsive Sidebar */
+        #sidebarToggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 8px 12px;
+            z-index: 1100;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -260px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 60px 20px 20px 20px;
+                border-radius: 0;
+            }
+
+            #sidebarToggle {
+                display: block;
+            }
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- Toggle Button for Mobile -->
+    <button id="sidebarToggle"><i class="bi bi-list"></i></button>
+
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="profile">
             <h5>Welcome, Admin</h5>
         </div>
@@ -122,8 +149,7 @@
         <a href="#" id="load-employees"><i class="bi bi-people"></i> Employee Details</a>
         <a href="#" id="load-tasks"><i class="bi bi-list-task"></i> Task Details</a>
         <a href="#" id="load-scoreboard"><i class="bi bi-trophy"></i> Score Board</a>
-        <a href="javascript:void(0);" id="load-roles"><i class="bi bi-person-badge"></i> Role Details</a>
-
+        <a href="#" id="load-roles"><i class="bi bi-person-badge"></i> Role Details</a>
         <a href="{{ route('admin.logout') }}" class="text-danger"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="bi bi-box-arrow-right"></i> Logout
@@ -133,7 +159,7 @@
         </form>
     </div>
 
-    <!-- Content Section -->
+    <!-- Content -->
     <div class="content">
         <div id="dynamic-content" class="container mt-5">
             <div class="card text-center">
@@ -146,6 +172,11 @@
     <!-- AJAX Scripts -->
     <script>
 
+     // Sidebar toggle on mobile
+     $("#sidebarToggle").click(function () {
+            $("#sidebar").toggleClass("active");
+        });
+        
         // Employee
         $(document).ready(function () {
             // Load Employee List

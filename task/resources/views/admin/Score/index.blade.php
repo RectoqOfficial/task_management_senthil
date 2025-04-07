@@ -25,7 +25,7 @@
                             <th class="border border-gray-600 p-2">Overdue Count</th>
                             <th class="border border-gray-600 p-2">Redo Count</th>
                             <th class="border border-gray-600 p-2">Score</th>
-                          =
+                        
                         </tr>
                     </thead>
                     <tbody>

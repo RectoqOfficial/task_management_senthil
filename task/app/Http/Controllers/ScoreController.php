@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 class ScoreController extends Controller
 {
+
+    // Score View
    public function index()
 {
     // Fetch all tasks and join with scores
@@ -18,48 +20,31 @@ class ScoreController extends Controller
 }
 
 
-    public function updateScore($task_id)
-    {
-        $task = Task::findOrFail($task_id);
-        $score = Score::where('task_id', $task_id)->first();
+public function updateScore($task_id)
+{
+    $task = Task::findOrFail($task_id); // get the task
+    $score = Score::firstOrNew(['task_id' => $task->id]); // get or create score
 
-        if (!$score) {
-            $score = new Score();
-            $score->task_id = $task->id;
-            $score->redo_count = 0;
-            $score->overdue_count = 0;
-        }
+    // Use the task's redo_count from the tasks table
+    $score->score = max(100 - ($task->redo_count * 10), 0);
+    $score->save();
 
-        // Score Calculation
-        if ($task->status == 'Completed') {
-            if ($task->completed_at > $task->deadline) {
-                $score->overdue_count++;
-                $score->score = 80;
-            } else {
-                $score->score = max(100 - ($score->redo_count * 10), 0);
-            }
-        } elseif ($task->status == 'Redo') {
-            $score->redo_count++;
-            $score->score = max(100 - ($score->redo_count * 10), 0);
-        }
+    return redirect()->route('score.index')->with('success', 'Score updated successfully.');
+}
 
-        $score->save();
-        return redirect()->route('score.index')->with('success', 'Score updated successfully.');
-    }
-    public function showScorePage()
-    {
-        try {
-            $employeeId = Auth::guard('employee')->id();
+
+
+    // Employee Score Page 
+        public function showScorePage()
+{
+    $employeeId = Auth::guard('employee')->id();
     
-            $tasks = Task::where('employee_id', $employeeId)
-                        ->with('score')
-                        ->select('id', 'task_title', 'status', 'redo_count') // Ensure the 'score' relationship exists
-                        ->get();
-    
-            return response()->json($tasks); // Return JSON data for AJAX
-        } catch (\Exception $e) {
-            Log::error('Scoreboard error: ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to load scores.'], 500);
-        }
-    }
+    // Fetch tasks assigned to the logged-in employee along with their scores
+    $tasks = Task::where('employee_id', $employeeId)
+                ->with('score')
+                ->get();
+
+    return view('admin.score.scores', compact('tasks'));
+}
+
 }
