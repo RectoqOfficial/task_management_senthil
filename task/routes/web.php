@@ -47,7 +47,7 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('/admin/employees/{id}', [EmployeeController::class, 'show'])->name('admin.employee.show');
     Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.destroy');
     // Route::get('/employee/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
- 
+
 
 Route::get('/employee/profile-view', function () {
     return view('admin.employee.profile');

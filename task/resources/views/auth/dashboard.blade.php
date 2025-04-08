@@ -205,7 +205,7 @@
                 $("#taskContainer").show();
                 $("#profileContainer, #scoreContainer").hide(); // Hide other sections
 
-                // event.preventDefault();
+                event.preventDefault();
                 LoadMyTask();
             });
         });
@@ -227,17 +227,20 @@
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.id}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_title}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.description}</td>
-                                   <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
+     <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
     <!-- Show current status -->
     <span class="text-sm font-semibold text-white mb-1 block">${task.status}</span>
 
-    <!-- Status update dropdown -->
-    <select class="status-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" data-task-id="${task.id}">
-        <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
-        <option value="Started" ${task.status === 'Started' ? 'selected' : ''}>Started</option>
-        <option value="Review" ${task.status === 'Review' ? 'selected' : ''}>Review</option>
-    </select>
+    <!-- Show dropdown only if status is NOT Completed -->
+    ${task.status !== 'Completed' ? `
+        <select class="status-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" data-task-id="${task.id}">
+            <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
+            <option value="Started" ${task.status === 'Started' ? 'selected' : ''}>Started</option>
+            <option value="Review" ${task.status === 'Review' ? 'selected' : ''}>Review</option>
+        </select>
+    ` : ''}
 </td>
+
 
                                      <td class="px-3 py-2 border border-gray-400 text-gray-100">
                                      <input type="date" class="start-date-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" 
@@ -248,12 +251,7 @@
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.total_days}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.redo_count}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.remarks}</td>
-                                    <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
-                                    <button class="update-task-btn bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded" 
-                                    data-task-id="${task.id}">
-                                      Update
-                                    </button>
-                                   </td>
+                               
 
                                 </tr>
                             `;
@@ -278,7 +276,7 @@
                                             <th class="px-3 py-2 border border-gray-400">Total Days</th>
                                             <th class="px-3 py-2 border border-gray-400">Redo Count</th>
                                             <th class="px-3 py-2 border border-gray-400">Remarks</th>
-                                            <th class="px-3 py-2 border border-gray-400">Action</th>
+                                          
 
                                         </tr>
                                     </thead>

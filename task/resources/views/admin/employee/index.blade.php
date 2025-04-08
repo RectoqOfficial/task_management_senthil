@@ -33,7 +33,7 @@
                         <th class="border border-gray-600 p-2">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="employeeTableBody">
                     @foreach($employees as $employee)
                     <tr class="bg-gray-900 hover:bg-gray-700">
                         <td class="border border-gray-600 p-2">{{ $employee->id }}</td>

@@ -105,36 +105,50 @@
 
 
 
+    $(document).ready(function () {
+    // Add CSRF token to all AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
-$(document).ready(function () {
     $('#employeeForm').on('submit', function (e) {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
 
         $.ajax({
             url: '/employees/store',
             method: 'POST',
             data: $(this).serialize(),
             success: function (response) {
-                // Show success message
-                alert('Employee created successfully!');
+                const employee = response.employee;
 
-                // Add new employee row dynamically
                 $('#employeeTableBody').append(`
                     <tr class="bg-gray-800 hover:bg-gray-700">
-                        <td class="p-2 border border-gray-600">${response.id}</td>
-                        <td class="p-2 border border-gray-600">${response.name}</td>
-                        <td class="p-2 border border-gray-600">${response.email}</td>
-                        <td class="p-2 border border-gray-600">${response.department}</td>
-                        <td class="p-2 border border-gray-600">${response.role}</td>
-                        <td class="p-2 border border-gray-600">${response.joining_date}</td>
+                        <td class="p-2 border border-gray-600">${employee.id}</td>
+                        <td class="p-2 border border-gray-600">${employee.name}</td>
+                        <td class="p-2 border border-gray-600">${employee.email}</td>
+                        <td class="p-2 border border-gray-600">${employee.contact}</td>
+                        <td class="p-2 border border-gray-600">${employee.department}</td>
+                        <td class="p-2 border border-gray-600">${employee.role}</td>
+                        <td class="p-2 border border-gray-600">${employee.joining_date}</td>
+  <td class="border border-gray-600 p-2">
+                                <button
+                                    class="delete-employee bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                                    data-id="${employee.id}">
+                                    Delete
+                                </button>
+                            </td>
                     </tr>
                 `);
 
-                $('#employeeForm')[0].reset(); // Reset the form
+                $('#employeeForm')[0].reset();
+                $('#createEmployeeModal').addClass('hidden');
+                alert('Employee created successfully!');
             },
             error: function (xhr) {
                 console.error(xhr.responseText);
-                alert('Error: Unable to add employee.');
+                alert('Error: Could not create employee.\n' + xhr.responseText);
             }
         });
     });

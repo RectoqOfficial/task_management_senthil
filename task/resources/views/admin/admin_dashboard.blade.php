@@ -142,10 +142,10 @@
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-        <div class="profile">
-            <h5>Welcome, Admin</h5>
+        <div class="profile" class="active"><i class="bi bi-speedometer2"></i> >
+            <h>Welcome, Admin</h4>
         </div>
-        <a href="#" id="load-dashboard" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <!-- <a href="#" id="load-dashboard" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a> -->
         <a href="#" id="load-employees"><i class="bi bi-people"></i> Employee Details</a>
         <a href="#" id="load-tasks"><i class="bi bi-list-task"></i> Task Details</a>
         <a href="#" id="load-scoreboard"><i class="bi bi-trophy"></i> Score Board</a>

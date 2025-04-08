@@ -179,32 +179,35 @@
 
             // auto sumbit
 
-            $(document).on("change", ".status-update-dropdown", function () {
-    let taskId = $(this).data("task-id");
-    let newStatus = $(this).val();
+         // Check if the handler has already been initialized
+    if (!window.statusUpdateEventAttached) {
+        window.statusUpdateEventAttached = true; // ✅ Mark it as initialized
 
-    $.ajax({
-        url: "{{ route('tasks.updateStatus') }}",
-        type: "POST",
-        data: {
-            _token: "{{ csrf_token() }}",
-            task_id: taskId,
-            status: newStatus
-        },
-        success: function (response) {
-            if (response.success) {
-                alert("Status updated successfully!");
-            } else {
-                alert("Failed to update status.");
-            }
-        },
-        error: function () {
-            alert("Error updating status.");
-        }
-    });
-});
+        $(document).on("change", ".status-update-dropdown", function () {
+            let taskId = $(this).data("task-id");
+            let newStatus = $(this).val();
 
-
+            $.ajax({
+                url: "{{ route('tasks.updateStatus') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    task_id: taskId,
+                    status: newStatus
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert("Status updated successfully!"); // ✅ Show once per change
+                    } else {
+                        alert("Failed to update status.");
+                    }
+                },
+                error: function () {
+                    alert("Error updating status.");
+                }
+            });
+        });
+    }
 
 
         </script>

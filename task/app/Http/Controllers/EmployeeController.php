@@ -16,6 +16,8 @@ class EmployeeController extends Controller
         $employees = Employee::with('role')->get();
         return view('admin.employee.index', compact('employees'));
     }
+
+
 //Employee Create Page      
     public function create()
     {
@@ -66,6 +68,7 @@ public function store(Request $request)
             'joining_date' => $employee->joining_date,
         ]
     ]);
+    
 }
 
 
