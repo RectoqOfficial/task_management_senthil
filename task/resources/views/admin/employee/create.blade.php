@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -152,6 +154,36 @@
             }
         });
     });
+});
+
+
+$(document).on('click', '.delete-employee', function (e) {
+    e.preventDefault();
+
+    const button = $(this);
+    const employeeId = button.data('id');
+
+    if (confirm('Are you sure you want to delete this employee?')) {
+        $.ajax({
+            url: `/employees/${employeeId}`,
+            type: 'POST',
+            data: {
+                _method: 'DELETE',
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                // ✅ Remove the row from the DOM
+                button.closest('tr').remove();
+
+                // ✅ Optional: Show a success toast or alert
+                alert('Employee deleted successfully!');
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('Error deleting employee.');
+            }
+        });
+    }
 });
 
 </script>   

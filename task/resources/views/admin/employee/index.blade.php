@@ -129,40 +129,40 @@
 
 
         // delete
-        $(document).on('submit', '.delete-employee-form', function (e) {
-    e.preventDefault();
+//         $(document).on('submit', '.delete-employee-form', function (e) {
+//     e.preventDefault();
 
-    var form = $(this);
-    var url = form.data('url');
-    var row = form.closest('tr');
+//     var form = $(this);
+//     var url = form.data('url');
+//     var row = form.closest('tr');
 
-    if (confirm("Are you sure you want to delete this employee?")) {
-        $.ajax({
-            url: url,
-            type: "DELETE",
-            headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
-            success: function (response) {
-                console.log(response); // Debug success response
+//     if (confirm("Are you sure you want to delete this employee?")) {
+//         $.ajax({
+//             url: url,
+//             type: "DELETE",
+//             headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
+//             success: function (response) {
+//                 console.log(response); // Debug success response
                 
-                if (response.success) {
-                    row.fadeOut(300, function () { $(this).remove(); });
-                } else {
-                    alert("Failed to delete employee: " + response.message);
-                }
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText); // Debugging error response
+//                 if (response.success) {
+//                     row.fadeOut(300, function () { $(this).remove(); });
+//                 } else {
+//                     alert("Failed to delete employee: " + response.message);
+//                 }
+//             },
+//             error: function (xhr) {
+//                 console.log(xhr.responseText); // Debugging error response
                 
-                try {
-                    var errorResponse = JSON.parse(xhr.responseText);
-                    alert("Error: " + errorResponse.message);
-                } catch (e) {
-                    alert("An unknown error occurred.");
-                }
-            }
-        });
-    }
-});
+//                 try {
+//                     var errorResponse = JSON.parse(xhr.responseText);
+//                     alert("Error: " + errorResponse.message);
+//                 } catch (e) {
+//                     alert("An unknown error occurred.");
+//                 }
+//             }
+//         });
+//     }
+// });
     </script>
 </body>
 </html>

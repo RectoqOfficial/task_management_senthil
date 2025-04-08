@@ -55,14 +55,24 @@ public function store(Request $request)
     $task->save();
 
        // If AJAX, return JSON
-       if ($request->ajax()) {
-        return response()->json([
-            'message' => 'Task created successfully',
+       return response()->json([
+        'task' => [
+            'id' => $task->id,
             'task_title' => $task->task_title,
-            'task_id' => $task->id
-        ]);
-    }
-    return redirect()->route('admin.dashboard')->with('success', 'Task added successfully');
+            'description' => $task->description,
+            'status' => $task->status,
+            'employee_name' => $task->employee->name,
+            'employee_email' => $task->employee->email,
+       'task_start_date' => Carbon::parse($task->task_start_date)->format('Y-m-d'),
+
+            'deadline' => $task->computed_deadline,
+            'total_days' => $task->total_days,
+            'redo_count' => $task->redo_count,
+            'remarks' => $task->remarks,
+        ]
+    ]);
+    
+    // return redirect()->route('admin.dashboard')->with('success', 'Task added successfully');
 }
 
     
