@@ -99,11 +99,12 @@
 
 <div class="flex-1 flex flex-col min-h-screen bg-white">
   <!-- Main Content -->
-  <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 ml-6 max-sm:w-[300px]">
+  <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 mx-[6px] mt-6 max-sm:w-[340px]">
+
   <!-- this is contailner  inside okey  sample using -->
  
  <!-- <div class="bg-white shadow-lg rounded-lg p-6 max-sm:w-[300px]"> -->
-        <h2 class="text-2xl font-bold text-gray-700 text-center">
+        <h2 class="text-2xl font-bold text-gray-700 text-center mt-10">
                 Welcome, {{ Auth::guard('employee')->user()->name }}!
             </h2>
             <p class="text-gray-600 text-center mt-2 ">Manage your tasks and performance here.</p>
@@ -112,7 +113,7 @@
            <!-- Task Container -->
             <div id="taskContainer" class="mt-6 "></div>
            <!-- Container where the scoreboard will be displayed -->
-            <div id="scoreContainer" class="mt-6 "></div>
+            <div id="scoreContainer" class="mt-2 "></div>
         </div>
     </div>
 </div>  
