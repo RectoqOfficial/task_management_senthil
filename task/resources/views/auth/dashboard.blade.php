@@ -102,7 +102,7 @@
     <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
  <!-- this is contailner  inside okey  sample using -->
  
- <div class="bg-white shadow-lg rounded-lg p-6">
+ <div class="bg-white shadow-lg rounded-lg p-6 max-sm:w-[300px]">
         <h2 class="text-2xl font-bold text-gray-700 text-center">
                 Welcome, {{ Auth::guard('employee')->user()->name }}!
             </h2>
