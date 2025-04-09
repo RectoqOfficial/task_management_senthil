@@ -26,7 +26,7 @@
 
 </head>
 
-<body class="bg-green-100 flex">
+<body class="bg-white flex">
 
     <!-- Toggle Button (Mobile Only) -->
     <div class="lg:hidden fixed top-4 left-4 z-50">
@@ -37,8 +37,7 @@
 
 
     <!-- Responsive Sidebar -->
-    <div id="sidebar"
-        class="fixed top-0 left-0 w-64 min-h-screen lg:h-screen bg-gradient-to-b from-purple-800 to-purple-900 text-white p-5 shadow-lg z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:transform-none">
+    <div id="sidebar" class="fixed top-0 left-0 w-64 min-h-screen lg:h-screen bg-gradient-to-b from-purple-800 to-purple-900 text-white p-5 shadow-lg z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:transform-none">
 
         <div class="text-center mb-6">
             <h2 class="text-lg font-semibold">Employee Dashboard</h2>
@@ -98,32 +97,25 @@
         });
     </script>
 
-
-    <!-- sider six responceve nice ---->
-
-    <!-- Main Content -->
+<div class="flex-1 flex flex-col min-h-screen bg-white">
+  <!-- Main Content -->
     <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
-
-        <!-- this is contailner  inside okey  sample using -->
-
-        <div class="bg-purple-300 shadow-lg rounded-lg p-6">
-            <h2 class="text-2xl font-bold text-gray-700 text-center">
+ <!-- this is contailner  inside okey  sample using -->
+ 
+ <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-gray-700 text-center">
                 Welcome, {{ Auth::guard('employee')->user()->name }}!
             </h2>
             <p class="text-gray-600 text-center mt-2">Manage your tasks and performance here.</p>
-
-
-
-            <!-- Profile Container -->
+             <!-- Profile Container -->
             <div id="profileContainer" class="mt-4"></div>
-
-            <!-- Task Container -->
-            <div id="taskContainer"></div>
-
-            <!-- Container where the scoreboard will be displayed -->
-            <div id="scoreContainer"></div>
+           <!-- Task Container -->
+            <div id="taskContainer" class="mt-6"></div>
+           <!-- Container where the scoreboard will be displayed -->
+            <div id="scoreContainer" class="mt-6"></div>
         </div>
     </div>
+</div>
 
     <!-- JavaScript for AJAX -->
     <script>
@@ -155,7 +147,7 @@
                         const profileHTML = `
     <div class="max-w-lg mx-auto bg-white shadow-xl rounded-lg overflow-hidden mt-6">
         <!-- Profile Header with Background Gradient -->
-        <div class="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white text-center relative">
+<div class="bg-gradient-to-b from-purple-800 to-purple-900 p-6 text-white text-center relative">
             <!-- User Icon instead of Profile Picture -->
             <div class="w-24 h-24 mx-auto rounded-full bg-white shadow-md flex items-center justify-center">
                 <i class="bi bi-person-circle text-4xl text-gray-700"></i>
@@ -227,32 +219,27 @@
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.id}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.task_title}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.description}</td>
-     <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
-    <!-- Show current status -->
-    <span class="text-sm font-semibold text-white mb-1 block">${task.status}</span>
+                                    <td class="px-3 py-2 border border-gray-400 text-gray-100 text-center">
+                                    <!-- Show current status -->
+                                    <span class="text-sm font-semibold text-white mb-1 block">${task.status}</span>
 
-    <!-- Show dropdown only if status is NOT Completed -->
-    ${task.status !== 'Completed' ? `
-        <select class="status-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" data-task-id="${task.id}">
-            <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
-            <option value="Started" ${task.status === 'Started' ? 'selected' : ''}>Started</option>
-            <option value="Review" ${task.status === 'Review' ? 'selected' : ''}>Review</option>
-        </select>
-    ` : ''}
-</td>
-
-
+                                     <!-- Show dropdown only if status is NOT Completed -->
+                                     ${task.status !== 'Completed' ? `
+                                    <select class="status-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" data-task-id="${task.id}">
+                                    <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="Started" ${task.status === 'Started' ? 'selected' : ''}>Started</option>
+                                    <option value="Review" ${task.status === 'Review' ? 'selected' : ''}>Review</option>
+                                    </select>
+                                    ` : ''}
+                                    </td>
                                      <td class="px-3 py-2 border border-gray-400 text-gray-100">
                                      <input type="date" class="start-date-update bg-gray-700 text-white border border-gray-400 px-2 py-1 rounded" 
                                       value="${task.task_start_date}" data-task-id="${task.id}">
                                     </td>
-
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.computed_deadline}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.total_days}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.redo_count}</td>
                                     <td class="px-3 py-2 border border-gray-400 text-gray-100">${task.remarks}</td>
-                               
-
                                 </tr>
                             `;
                         });
@@ -261,29 +248,32 @@
                     }
 
                     $("#taskContainer").html(`
-                        <div class="mt-6">
-                            <h3 class="text-xl font-semibold text-gray-700">My Tasks</h3>
-                            <div class="overflow-x-auto mt-4">
-                                <table class="w-full rounded-lg overflow-hidden shadow-md text-gray-300 border border-gray-600">
-                                    <thead>
-                                        <tr class="bg-purple-500 text-white text-left text-sm border-b border-gray-400">
-                                            <th class="px-3 py-2 border border-gray-400">ID</th>
-                                            <th class="px-3 py-2 border border-gray-400">Task Title</th>
-                                            <th class="px-3 py-2 border border-gray-400">Description</th>
-                                            <th class="px-3 py-2 border border-gray-400">Status</th>
-                                            <th class="px-3 py-2 border border-gray-400">Start Date</th>
-                                            <th class="px-3 py-2 border border-gray-400">Deadline</th>
-                                            <th class="px-3 py-2 border border-gray-400">Total Days</th>
-                                            <th class="px-3 py-2 border border-gray-400">Redo Count</th>
-                                            <th class="px-3 py-2 border border-gray-400">Remarks</th>
-                                          
+ <div class="mt-6">
+  <h3 class="text-xl font-semibold text-gray-700">My Tasks</h3>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>${rows}</tbody>
-                                </table>
-                            </div>
-                        </div>
+  <!-- Make table scroll horizontally on small screens -->
+  <div class="overflow-x-auto mt-4">
+    <table class="min-w-[900px] w-full rounded-lg overflow-hidden shadow-md text-gray-300 border border-gray-600">
+      <thead>
+        <tr class="bg-purple-500 text-white text-left text-sm border-b border-gray-400">
+          <th class="px-3 py-2 border border-gray-400">ID</th>
+          <th class="px-3 py-2 border border-gray-400">Task Title</th>
+          <th class="px-3 py-2 border border-gray-400">Description</th>
+          <th class="px-3 py-2 border border-gray-400">Status</th>
+          <th class="px-3 py-2 border border-gray-400">Start Date</th>
+          <th class="px-3 py-2 border border-gray-400">Deadline</th>
+          <th class="px-3 py-2 border border-gray-400">Total Days</th>
+          <th class="px-3 py-2 border border-gray-400">Redo Count</th>
+          <th class="px-3 py-2 border border-gray-400">Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  </div>
+</div>
+
                     `);
                 },
                 error: function () {
@@ -369,7 +359,7 @@
                         status: newStatus
                     },
                     success: function (response) {
-                        alert('Status updated successfully!');
+                        // alert('Status updated successfully!');
                         // Optionally refresh or update parts of the DOM
                     },
                     error: function () {

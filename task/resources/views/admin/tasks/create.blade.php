@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
+        /* body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(to right, #6a11cb, #2575fc);
             min-height: 100vh;
@@ -16,8 +16,9 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
-            margin: 100px;
-        }
+            margin-left: 120px;
+            
+        } */
     </style>
 </head>
 
@@ -32,56 +33,56 @@
                     d="M17 9V7a4 4 0 10-8 0v2M5 21h14a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
             </svg>
             Create Task
-        </h2>
+        </h2> 
 
-        <form id="task-form" action="{{ route('admin.tasks.store') }}" method="POST" class="space-y-4 text-sm">
-            @csrf
+        <form id="task-form" action="{{ route('admin.tasks.store') }}" method="POST" class="space-y-2 text-xs">
+    @csrf
 
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Task Title:</label>
-                <input type="text" name="task_title"
-                    class="w-full border border-gray-600 rounded-lg p-2.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    required>
-            </div>
+    <div>
+        <label class="block text-[10px] font-medium text-gray-300 mb-0.5">Task Title:</label>
+        <input type="text" name="task_title"
+            class="w-full border border-gray-600 rounded-lg p-1.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required>
+    </div>
 
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Description:</label>
-                <textarea name="description"
-                    class="w-full border border-gray-600 rounded-lg p-2.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    rows="3" required></textarea>
-            </div>
+    <div>
+        <label class="block text-[10px] font-medium text-gray-300 mb-0.5">Description:</label>
+        <textarea name="description"
+            class="w-full border border-gray-600 rounded-lg p-1.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            rows="2" required></textarea>
+    </div>
 
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Assign To:</label>
-                <select name="employee_id"
-                    class="w-full border border-gray-600 rounded-lg p-2.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    required>
-                    <option value="">Select Employee</option>
-                    @foreach ($employees as $employee)
-                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+    <div>
+        <label class="block text-[10px] font-medium text-gray-300 mb-0.5">Assign To:</label>
+        <select name="employee_id"
+            class="w-full border border-gray-600 rounded-lg p-1.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required>
+            <option value="">Select Employee</option>
+            @foreach ($employees as $employee)
+                <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+            @endforeach
+        </select>
+    </div>
 
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Total Days:</label>
-                <input type="number" name="total_days"
-                    class="w-full border border-gray-600 rounded-lg p-2.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    required>
-            </div>
+    <div>
+        <label class="block text-[10px] font-medium text-gray-300 mb-0.5">Total Days:</label>
+        <input type="number" name="total_days"
+            class="w-full border border-gray-600 rounded-lg p-1.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required>
+    </div>
 
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Remarks:</label>
-                <textarea name="remarks"
-                    class="w-full border border-gray-600 rounded-lg p-2.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    rows="2"></textarea>
-            </div>
+    <div>
+        <label class="block text-[10px] font-medium text-gray-300 mb-0.5">Remarks:</label>
+        <textarea name="remarks"
+            class="w-full border border-gray-600 rounded-lg p-1.5 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            rows="1"></textarea>
+    </div>
 
-            <button type="submit"
-                class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition duration-200">
-                Create Task
-            </button>
-        </form>
+    <button type="submit"
+        class="w-full bg-purple-600 text-white py-1.5 text-xs rounded-lg hover:bg-purple-700 transition duration-200">
+        Create Task
+    </button>
+</form>
 
     </div>
 

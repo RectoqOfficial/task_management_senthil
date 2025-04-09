@@ -103,13 +103,13 @@
         #sidebarToggle {
             display: none;
             position: fixed;
-            top: 15px;
-            left: 15px;
+            top: 5px;
+            left: 5px;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
             border: none;
-            border-radius: 50%;
-            padding: 8px 12px;
+            border-radius: 40%;
+            padding: 4px 6px;
             z-index: 1100;
         }
 

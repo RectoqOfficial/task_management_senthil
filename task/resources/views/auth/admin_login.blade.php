@@ -7,7 +7,7 @@
     <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 </head>
-<body class="flex items-center justify-center h-screen bg-gradient-to-r from-blue-500 to-indigo-600">
+<body class="flex items-center justify-center h-screen bg-white">
 
     <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-md">
         <h2 class="text-3xl font-bold text-center text-blue-700 mb-6">Admin Login</h2>

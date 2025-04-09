@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 <body class="bg-black text-white p-4 sm:p-6">
@@ -62,17 +64,19 @@
 
 <!-- Modal for Creating Employee -->
 <div id="createEmployeeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-    <div class="bg-gray-800 text-gray-100 p-4 sm:p-6 rounded-lg shadow-xl w-full max-w-md mx-auto">
+    <div class="bg-gray-800 text-gray-100 p-4 sm:p-6 rounded-lg shadow-xl w-full max-w-md mx-auto relative">
+        <!-- Font Awesome Close Icon -->
+        <button id="close-modal" class="absolute top-2 right-2 text-white hover:text-red-400 transition text-xl">
+            <i class="fas fa-times"></i>
+        </button>
 
-        <h3 class="text-lg font-bold mb-2 text-white">Add Employee</h3>
+        <h3 class="text-lg font-bold mb-2 text-white text-center">Add Employee</h3>
         <div id="modal-content">
             <p class="text-gray-200">Loading...</p>
         </div>
-        <button id="close-modal" class="mt-2 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
-            Close
-        </button>
     </div>
 </div>
+
 
 
 

@@ -6,7 +6,7 @@
     <title>Employee Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex items-center justify-center h-screen bg-gradient-to-br from-blue-500 to-indigo-600">
+<body class="flex items-center justify-center h-screen bg-white">
 
     <div class="bg-white shadow-2xl rounded-xl p-8 w-full max-w-md">
         <h2 class="text-3xl font-bold text-center text-indigo-700 mb-6">Employee Login</h2>

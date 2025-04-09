@@ -17,7 +17,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full border border-gray-600 text-white text-center">
                     <thead>
-                        <tr class="bg-purple-600 text-white text-left text-sm">
+                        <tr class="bg-purple-500 text-white text-left text-sm">
                             <th class="border border-gray-600 p-2">ID</th>
                             <th class="border border-gray-600 p-2">Task Title</th>
                             <th class="border border-gray-600 p-2">Task Member</th>
