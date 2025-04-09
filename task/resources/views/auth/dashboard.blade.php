@@ -99,23 +99,23 @@
 
 <div class="flex-1 flex flex-col min-h-screen bg-white">
   <!-- Main Content -->
-    <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
+    <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 max-sm:w-[300px]">
  <!-- this is contailner  inside okey  sample using -->
  
- <div class="bg-white shadow-lg rounded-lg p-6 max-sm:w-[300px]">
-        <h2 class="text-2xl font-bold text-gray-700 text-center">
+ <!-- <div class="bg-white shadow-lg rounded-lg p-6 max-sm:w-[300px]"> -->
+        <h2 class="text-2xl font-bold text-gray-700 text-center ml-[70px] mt-[30px]">
                 Welcome, {{ Auth::guard('employee')->user()->name }}!
             </h2>
-            <p class="text-gray-600 text-center mt-2">Manage your tasks and performance here.</p>
+            <p class="text-gray-600 text-center mt-2 ml-[70px]">Manage your tasks and performance here.</p>
              <!-- Profile Container -->
-            <div id="profileContainer" class="mt-4"></div>
+            <div id="profileContainer" class="mt-4 ml-[12px]  w-[300px]"></div>
            <!-- Task Container -->
-            <div id="taskContainer" class="mt-6"></div>
+            <div id="taskContainer" class="mt-6 ml-[6px]  w-[315px]"></div>
            <!-- Container where the scoreboard will be displayed -->
-            <div id="scoreContainer" class="mt-6"></div>
+            <div id="scoreContainer" class="mt-6 w-[330px]"></div>
         </div>
     </div>
-</div>
+</div>  
 
     <!-- JavaScript for AJAX -->
     <script>
