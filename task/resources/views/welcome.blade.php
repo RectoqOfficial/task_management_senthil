@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-gradient-to-r from-green-700 via-purple-800 to-gray-900 text-gray-300 h-screen flex items-center justify-center">
+<body class="bg-white text-gray-900 h-screen flex items-center justify-center">
     
-    <div class="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl text-center max-w-xl border border-white/20">
+<div class="bg-purple-800 backdrop-blur-lg p-10 rounded-2xl shadow-xl text-center max-w-xl border border-white/20 text-white">
         <h1 class="text-5xl font-extrabold text-white mb-4">Welcome!</h1>
         <p class="text-lg mb-6 bg-gradient-to-r from-green-300 via-purple-400 to-blue-300 text-transparent bg-clip-text font-semibold drop-shadow-lg">
     Effortlessly manage tasks, track progress, and boost productivity with ease.
