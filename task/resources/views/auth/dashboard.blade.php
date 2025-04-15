@@ -207,7 +207,7 @@
             let url = $("#myTasksBtn").data("url");
 
             $.ajax({
-                url: url,
+                url: "/employee/my-tasks",
                 type: "GET",
                 dataType: "json",
                 success: function (tasks) {

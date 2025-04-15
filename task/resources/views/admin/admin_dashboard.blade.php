@@ -198,7 +198,8 @@
             $("#load-tasks").click(function (e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ route('admin.tasks.index') }}",
+                    url: "{{ url('admin/tasks') }}",
+
                     type: "GET",
                     success: function (response) {
                         $("#dynamic-content").html(response);
